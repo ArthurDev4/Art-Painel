@@ -7,9 +7,9 @@ import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const TypingIndicator = () => (
-  <div className="flex items-end gap-1.5 animate-in fade-in duration-300 mb-2">
-    {/* Avatar circular com fundo preto igual ao print */}
-    <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-md">
+  <div className="flex items-end gap-2 animate-in fade-in duration-300 mb-2">
+    {/* Avatar circular alinhado à base */}
+    <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-sm border border-black/5">
       <Image 
         src="https://picsum.photos/seed/elite-logo/100/100" 
         alt="Avatar" 
@@ -19,14 +19,13 @@ const TypingIndicator = () => (
         data-ai-hint="gaming logo"
       />
     </div>
-    {/* Balão de digitação branco e arredondado */}
-    <div className="relative bg-white p-2.5 px-4 rounded-[22px] rounded-bl-none shadow-sm flex items-center justify-center h-[36px] min-w-[55px]">
-      {/* Cauda precisa do balão */}
-      <div className="absolute bottom-0 -left-1.5 w-3 h-3 bg-white clip-path-tail-typing"></div>
+    {/* Balão de digitação refinado e mais compacto */}
+    <div className="relative bg-white py-3 px-5 rounded-[20px] rounded-bl-none shadow-sm flex items-center justify-center min-h-[42px]">
+      <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
       <div className="flex gap-1.5">
-        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce"></div>
+        <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+        <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+        <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce"></div>
       </div>
     </div>
   </div>
@@ -70,20 +69,27 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen whatsapp-bg overflow-hidden font-body selection:bg-[#00a884]/30">
-      {/* Chat Area - Ocupa toda a tela agora sem header */}
+      {/* Chat Area - Scroll suave e limpo */}
       <main className="flex-1 overflow-y-auto p-4 md:px-12 space-y-4 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-10 pb-10">
         
+        {/* Data Centrada */}
+        <div className="flex justify-center my-6 animate-in fade-in duration-700">
+          <span className="bg-[#182229]/70 backdrop-blur-sm text-[#8696a0] text-[11px] px-3 py-1.5 rounded-lg shadow-sm font-medium uppercase tracking-wider">
+            Hoje
+          </span>
+        </div>
+
         {/* Bot Message Group */}
         <div className="space-y-1.5 w-full max-w-[95%] md:max-w-[75%]">
-          {/* Typing for Message 1 */}
+          {/* Efeito de Digitação 1 */}
           {isTyping && visibleMessages === 0 && <TypingIndicator />}
 
-          {/* Message 1 */}
+          {/* Mensagem 1 */}
           {visibleMessages >= 1 && (
             <div className="flex items-start gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
-              {/* Espaçador para manter o alinhamento sem o avatar na primeira msg */}
+              {/* Espaçador para manter o alinhamento sem o avatar na primeira msg do grupo */}
               <div className="w-9 h-9 shrink-0"></div>
-              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-tl-none shadow-sm flex-1">
+              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-tl-none shadow-sm flex-1 max-w-fit">
                 <div className="absolute top-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-top"></div>
                 <p className="text-[14.5px] leading-relaxed">
                   🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥
@@ -93,10 +99,10 @@ export default function Home() {
             </div>
           )}
 
-          {/* Typing for Message 2 */}
+          {/* Efeito de Digitação 2 */}
           {isTyping && visibleMessages === 1 && <TypingIndicator />}
 
-          {/* Message 2 + Avatar */}
+          {/* Mensagem 2 + Avatar */}
           {visibleMessages >= 2 && (
             <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
               <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-md">
@@ -108,7 +114,7 @@ export default function Home() {
                   className="object-cover"
                 />
               </div>
-              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex-1">
+              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex-1 max-w-fit">
                 <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
                 <p className="text-[14.5px] leading-relaxed">
                   Para resgatar seu cupom, basta selecionar abaixo qual é o seu dispositivo:
@@ -140,22 +146,22 @@ export default function Home() {
 
         {/* Quick Reply Buttons */}
         {!userChoice && visibleMessages >= 2 && !isTyping && (
-          <div className="flex flex-wrap gap-2 justify-center py-6 animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-both">
+          <div className="flex flex-wrap gap-2 justify-center py-10 animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-both">
             <Button 
               onClick={() => handleChoice("Celular ANDROID")}
-              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-5 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-5 h-auto font-medium text-[15px] shadow-lg transition-transform active:scale-95 border-none"
             >
               Celular ANDROID
             </Button>
             <Button 
               onClick={() => handleChoice("Celular IOS")}
-              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-5 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-5 h-auto font-medium text-[15px] shadow-lg transition-transform active:scale-95 border-none"
             >
               Celular IOS
             </Button>
             <Button 
               onClick={() => handleChoice("Emulador")}
-              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-5 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-5 h-auto font-medium text-[15px] shadow-lg transition-transform active:scale-95 border-none"
             >
               Emulador
             </Button>
@@ -172,9 +178,6 @@ export default function Home() {
         }
         .clip-path-tail-right-top {
           clip-path: polygon(0 0, 0 100%, 100% 0);
-        }
-        .clip-path-tail-typing {
-          clip-path: polygon(100% 0, 100% 100%, 0 100%);
         }
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
