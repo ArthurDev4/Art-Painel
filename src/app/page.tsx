@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { MoreVertical, CheckCircle2, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const TypingIndicator = () => (
@@ -70,48 +70,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen whatsapp-bg overflow-hidden font-body selection:bg-[#00a884]/30">
-      {/* WhatsApp Header */}
-      <header className="bg-[#202c33] text-[#e9edef] px-4 py-3 flex items-center justify-between shadow-md z-10">
-        <div className="flex items-center gap-3">
-          <div className="relative">
-            <div className="w-10 h-10 rounded-full bg-[#6a7175] flex items-center justify-center overflow-hidden border border-white/5">
-              <Image 
-                src="https://picsum.photos/seed/elite/100/100" 
-                alt="Elite Xiters" 
-                width={40} 
-                height={40}
-                className="object-cover"
-                data-ai-hint="gaming avatar"
-              />
-            </div>
-            <div className="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 bg-[#00a884] border-2 border-[#202c33] rounded-full"></div>
-          </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <span className="font-medium text-[16px] leading-tight uppercase">ELITE XITERS</span>
-              <div className="bg-[#00a884] rounded-full p-0.5">
-                <CheckCircle2 className="w-3 h-3 text-[#202c33] fill-current" />
-              </div>
-            </div>
-            <span className="text-[13px] text-[#00a884]">online</span>
-          </div>
-        </div>
-        <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon" className="text-[#aebac1] hover:bg-white/5 rounded-full">
-            <MoreVertical className="w-5 h-5" />
-          </Button>
-        </div>
-      </header>
-
-      {/* Chat Area */}
-      <main className="flex-1 overflow-y-auto p-4 md:px-12 space-y-4 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pb-10">
-        {/* Date Divider */}
-        <div className="flex justify-center my-2 animate-in fade-in zoom-in duration-500 fill-mode-both">
-          <span className="bg-[#182229] text-[#8696a0] text-[12.5px] px-3 py-1.5 rounded-lg shadow-sm font-medium">
-            Hoje
-          </span>
-        </div>
-
+      {/* Chat Area - Ocupa toda a tela agora sem header */}
+      <main className="flex-1 overflow-y-auto p-4 md:px-12 space-y-4 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-10 pb-10">
+        
         {/* Bot Message Group */}
         <div className="space-y-1.5 w-full max-w-[95%] md:max-w-[75%]">
           {/* Typing for Message 1 */}
@@ -120,7 +81,8 @@ export default function Home() {
           {/* Message 1 */}
           {visibleMessages >= 1 && (
             <div className="flex items-start gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
-              <div className="w-9 h-9 shrink-0 opacity-0"></div>
+              {/* Espaçador para manter o alinhamento sem o avatar na primeira msg */}
+              <div className="w-9 h-9 shrink-0"></div>
               <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-tl-none shadow-sm flex-1">
                 <div className="absolute top-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-top"></div>
                 <p className="text-[14.5px] leading-relaxed">
