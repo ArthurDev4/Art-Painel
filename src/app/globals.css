@@ -45,10 +45,11 @@
 }
 
 .whatsapp-bg {
-  background-color: #0b141a;
-  background-image: url("https://static.whatsapp.net/rsrc.php/v3/y6/r/wa69999.png");
-  background-repeat: repeat;
-  background-blend-mode: overlay;
+  background-image: url("https://i.postimg.cc/c1K3rvFc/e8d94e1e8b6b530ad315e9385290141b.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .glass-card {
