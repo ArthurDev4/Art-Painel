@@ -7,22 +7,26 @@ import { MoreVertical, CheckCircle2, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const TypingIndicator = () => (
-  <div className="flex items-end gap-2 animate-in fade-in duration-300">
-    <div className="w-9 h-9 rounded-full bg-[#0a0a0a] flex items-center justify-center overflow-hidden shrink-0 border border-white/5 shadow-md">
+  <div className="flex items-end gap-1.5 animate-in fade-in duration-300 mb-2">
+    {/* Avatar circular com fundo preto igual ao print */}
+    <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-md">
       <Image 
         src="https://picsum.photos/seed/elite-logo/100/100" 
         alt="Avatar" 
         width={36} 
         height={36} 
         className="object-cover"
+        data-ai-hint="gaming logo"
       />
     </div>
-    <div className="relative bg-white p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex items-center gap-1 min-w-[65px] h-[40px]">
-      <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
-      <div className="flex gap-1.5 mt-1">
-        <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-        <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-        <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce"></div>
+    {/* Balão de digitação branco e arredondado */}
+    <div className="relative bg-white p-2.5 px-4 rounded-[22px] rounded-bl-none shadow-sm flex items-center justify-center h-[36px] min-w-[55px]">
+      {/* Cauda precisa do balão */}
+      <div className="absolute bottom-0 -left-1.5 w-3 h-3 bg-white clip-path-tail-typing"></div>
+      <div className="flex gap-1.5">
+        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce"></div>
       </div>
     </div>
   </div>
@@ -42,7 +46,7 @@ export default function Home() {
       // Pequeno delay inicial
       await new Promise(r => setTimeout(r, 800));
       
-      // Digitante para a primeira mensagem
+      // Digitando para a primeira mensagem
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
@@ -50,7 +54,7 @@ export default function Home() {
 
       await new Promise(r => setTimeout(r, 1200));
 
-      // Digitante para a segunda mensagem
+      // Digitando para a segunda mensagem
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
@@ -122,6 +126,9 @@ export default function Home() {
 
         {/* Bot Message Group */}
         <div className="space-y-1.5 w-full max-w-[95%] md:max-w-[75%]">
+          {/* Typing for Message 1 */}
+          {isTyping && visibleMessages === 0 && <TypingIndicator />}
+
           {/* Message 1 */}
           {visibleMessages >= 1 && (
             <div className="flex items-start gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
@@ -136,10 +143,13 @@ export default function Home() {
             </div>
           )}
 
+          {/* Typing for Message 2 */}
+          {isTyping && visibleMessages === 1 && <TypingIndicator />}
+
           {/* Message 2 + Avatar */}
           {visibleMessages >= 2 && (
             <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
-              <div className="w-9 h-9 rounded-full bg-[#0a0a0a] flex items-center justify-center overflow-hidden shrink-0 border border-white/5 shadow-md">
+              <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-md">
                 <Image 
                   src="https://picsum.photos/seed/elite-logo/100/100" 
                   alt="Avatar" 
@@ -157,9 +167,6 @@ export default function Home() {
               </div>
             </div>
           )}
-
-          {/* Typing Indicator */}
-          {isTyping && <TypingIndicator />}
         </div>
 
         {/* User Response Message */}
@@ -215,6 +222,9 @@ export default function Home() {
         }
         .clip-path-tail-right-top {
           clip-path: polygon(0 0, 0 100%, 100% 0);
+        }
+        .clip-path-tail-typing {
+          clip-path: polygon(100% 0, 100% 100%, 0 100%);
         }
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
