@@ -6,13 +6,61 @@ import Image from 'next/image';
 import { MoreVertical, CheckCircle2, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+const TypingIndicator = () => (
+  <div className="flex items-end gap-2 animate-in fade-in duration-300 mb-2">
+    <div className="w-9 h-9 rounded-full bg-[#0a0a0a] flex items-center justify-center overflow-hidden shrink-0 border border-white/5 shadow-md">
+      <Image 
+        src="https://picsum.photos/seed/elite-logo/100/100" 
+        alt="Avatar" 
+        width={36} 
+        height={36} 
+        className="object-cover"
+      />
+    </div>
+    <div className="relative bg-white p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex items-center gap-1 min-w-[60px] h-[38px]">
+      <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
+      <div className="flex gap-1">
+        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function Home() {
   const [userChoice, setUserChoice] = useState<string | null>(null);
-  const [currentTime, setCurrentTime] = useState("17:14");
+  const [currentTime, setCurrentTime] = useState("");
+  const [visibleMessages, setVisibleMessages] = useState<number>(0);
+  const [isTyping, setIsTyping] = useState<boolean>(false);
 
   useEffect(() => {
     const now = new Date();
     setCurrentTime(now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }));
+
+    // Sequence of chat appearance
+    const sequence = async () => {
+      // Step 0: Date and Info (immediate or very fast)
+      setVisibleMessages(0);
+      
+      await new Promise(r => setTimeout(r, 1000));
+      
+      // Step 1: Typing Message 1
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 2000));
+      setIsTyping(false);
+      setVisibleMessages(1);
+
+      await new Promise(r => setTimeout(r, 800));
+
+      // Step 2: Typing Message 2
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 2500));
+      setIsTyping(false);
+      setVisibleMessages(2);
+    };
+
+    sequence();
   }, []);
 
   const handleChoice = (choice: string) => {
@@ -64,7 +112,7 @@ export default function Home() {
         </div>
 
         {/* Business Info Message */}
-        <div className="flex justify-center w-full mb-2 animate-in fade-in slide-in-from-top-4 duration-500 delay-200 fill-mode-both">
+        <div className="flex justify-center w-full mb-2 animate-in fade-in slide-in-from-top-4 duration-500 fill-mode-both">
           <div className="bg-[#d1f4ff] text-[#111b21] p-3 px-4 rounded-[14px] flex items-center gap-3 shadow-sm border border-[#b3e5f2] max-w-[90%] md:max-w-md">
             <div className="bg-[#54656f] rounded-full w-5 h-5 flex items-center justify-center shrink-0">
                <span className="text-[#d1f4ff] font-bold text-[13px] leading-none mb-0.5">!</span>
@@ -78,37 +126,44 @@ export default function Home() {
         {/* Bot Message Group */}
         <div className="space-y-1.5 w-full max-w-[90%] md:max-w-[75%]">
           {/* Message 1 */}
-          <div className="flex items-start gap-2 animate-in fade-in slide-in-from-left-6 duration-500 delay-500 fill-mode-both">
-            <div className="w-9 h-9 shrink-0 opacity-0"></div>
-            <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-tl-none shadow-sm flex-1">
-              <div className="absolute top-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-top"></div>
-              <p className="text-[14.5px] leading-relaxed">
-                🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥
-              </p>
-              <div className="text-[11px] text-[#667781] text-right mt-1 font-normal">{currentTime}</div>
+          {visibleMessages >= 1 && (
+            <div className="flex items-start gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
+              <div className="w-9 h-9 shrink-0 opacity-0"></div>
+              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-tl-none shadow-sm flex-1">
+                <div className="absolute top-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-top"></div>
+                <p className="text-[14.5px] leading-relaxed">
+                  🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥
+                </p>
+                <div className="text-[11px] text-[#667781] text-right mt-1 font-normal">{currentTime}</div>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Message 2 + Avatar */}
-          <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 delay-1000 fill-mode-both">
-            <div className="w-9 h-9 rounded-full bg-[#0a0a0a] flex items-center justify-center overflow-hidden shrink-0 border border-white/5 shadow-md">
-              <Image 
-                src="https://picsum.photos/seed/elite-logo/100/100" 
-                alt="Avatar" 
-                width={36} 
-                height={36} 
-                className="object-cover"
-                data-ai-hint="gaming logo"
-              />
+          {visibleMessages >= 2 && (
+            <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
+              <div className="w-9 h-9 rounded-full bg-[#0a0a0a] flex items-center justify-center overflow-hidden shrink-0 border border-white/5 shadow-md">
+                <Image 
+                  src="https://picsum.photos/seed/elite-logo/100/100" 
+                  alt="Avatar" 
+                  width={36} 
+                  height={36} 
+                  className="object-cover"
+                  data-ai-hint="gaming logo"
+                />
+              </div>
+              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex-1">
+                <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
+                <p className="text-[14.5px] leading-relaxed">
+                  Para resgatar seu cupom, basta selecionar abaixo qual é o seu dispositivo:
+                </p>
+                <div className="text-[11px] text-[#667781] text-right mt-1 font-normal">{currentTime}</div>
+              </div>
             </div>
-            <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex-1">
-              <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
-              <p className="text-[14.5px] leading-relaxed">
-                Para resgatar seu cupom, basta selecionar abaixo qual é o seu dispositivo:
-              </p>
-              <div className="text-[11px] text-[#667781] text-right mt-1 font-normal">{currentTime}</div>
-            </div>
-          </div>
+          )}
+
+          {/* Typing Indicator */}
+          {isTyping && <TypingIndicator />}
         </div>
 
         {/* User Response Message */}
@@ -130,9 +185,9 @@ export default function Home() {
           </div>
         )}
 
-        {/* Quick Reply Buttons - AS IN THE IMAGE */}
-        {!userChoice && (
-          <div className="flex flex-wrap gap-2 justify-center py-4 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-1500 fill-mode-both">
+        {/* Quick Reply Buttons */}
+        {!userChoice && visibleMessages >= 2 && (
+          <div className="flex flex-wrap gap-2 justify-center py-4 animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-both">
             <Button 
               onClick={() => handleChoice("Celular ANDROID")}
               className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-5 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
