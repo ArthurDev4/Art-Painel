@@ -7,7 +7,7 @@ import { MoreVertical, CheckCircle2, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const TypingIndicator = () => (
-  <div className="flex items-end gap-2 animate-in fade-in duration-300 mb-2">
+  <div className="flex items-end gap-2 animate-in fade-in duration-300">
     <div className="w-9 h-9 rounded-full bg-[#0a0a0a] flex items-center justify-center overflow-hidden shrink-0 border border-white/5 shadow-md">
       <Image 
         src="https://picsum.photos/seed/elite-logo/100/100" 
@@ -17,12 +17,12 @@ const TypingIndicator = () => (
         className="object-cover"
       />
     </div>
-    <div className="relative bg-white p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex items-center gap-1 min-w-[60px] h-[38px]">
+    <div className="relative bg-white p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex items-center gap-1 min-w-[65px] h-[40px]">
       <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
-      <div className="flex gap-1">
-        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-        <div className="w-2 h-2 bg-[#949494] rounded-full animate-bounce"></div>
+      <div className="flex gap-1.5 mt-1">
+        <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+        <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+        <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce"></div>
       </div>
     </div>
   </div>
@@ -38,22 +38,19 @@ export default function Home() {
     const now = new Date();
     setCurrentTime(now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }));
 
-    // Sequence of chat appearance
     const sequence = async () => {
-      // Step 0: Date and Info (immediate or very fast)
-      setVisibleMessages(0);
+      // Pequeno delay inicial
+      await new Promise(r => setTimeout(r, 800));
       
-      await new Promise(r => setTimeout(r, 1000));
-      
-      // Step 1: Typing Message 1
+      // Digitante para a primeira mensagem
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setVisibleMessages(1);
 
-      await new Promise(r => setTimeout(r, 800));
+      await new Promise(r => setTimeout(r, 1200));
 
-      // Step 2: Typing Message 2
+      // Digitante para a segunda mensagem
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
@@ -103,7 +100,7 @@ export default function Home() {
       </header>
 
       {/* Chat Area */}
-      <main className="flex-1 overflow-y-auto p-4 md:px-12 space-y-4 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide">
+      <main className="flex-1 overflow-y-auto p-4 md:px-12 space-y-4 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pb-10">
         {/* Date Divider */}
         <div className="flex justify-center my-2 animate-in fade-in zoom-in duration-500 fill-mode-both">
           <span className="bg-[#182229] text-[#8696a0] text-[12.5px] px-3 py-1.5 rounded-lg shadow-sm font-medium">
@@ -112,8 +109,8 @@ export default function Home() {
         </div>
 
         {/* Business Info Message */}
-        <div className="flex justify-center w-full mb-2 animate-in fade-in slide-in-from-top-4 duration-500 fill-mode-both">
-          <div className="bg-[#d1f4ff] text-[#111b21] p-3 px-4 rounded-[14px] flex items-center gap-3 shadow-sm border border-[#b3e5f2] max-w-[90%] md:max-w-md">
+        <div className="flex justify-center w-full mb-4 animate-in fade-in slide-in-from-top-4 duration-500 fill-mode-both">
+          <div className="bg-[#d1f4ff] text-[#111b21] p-3 px-4 rounded-[14px] flex items-center gap-3 shadow-sm border border-[#b3e5f2] max-w-[95%] md:max-w-md">
             <div className="bg-[#54656f] rounded-full w-5 h-5 flex items-center justify-center shrink-0">
                <span className="text-[#d1f4ff] font-bold text-[13px] leading-none mb-0.5">!</span>
             </div>
@@ -124,7 +121,7 @@ export default function Home() {
         </div>
 
         {/* Bot Message Group */}
-        <div className="space-y-1.5 w-full max-w-[90%] md:max-w-[75%]">
+        <div className="space-y-1.5 w-full max-w-[95%] md:max-w-[75%]">
           {/* Message 1 */}
           {visibleMessages >= 1 && (
             <div className="flex items-start gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
@@ -149,7 +146,6 @@ export default function Home() {
                   width={36} 
                   height={36} 
                   className="object-cover"
-                  data-ai-hint="gaming logo"
                 />
               </div>
               <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex-1">
@@ -168,7 +164,7 @@ export default function Home() {
 
         {/* User Response Message */}
         {userChoice && (
-          <div className="flex justify-end w-full mt-2 animate-in fade-in slide-in-from-right-6 duration-300 fill-mode-both">
+          <div className="flex justify-end w-full mt-4 animate-in fade-in slide-in-from-right-6 duration-300 fill-mode-both">
             <div className="relative bg-[#d9fdd3] text-[#111b21] py-2.5 px-4 rounded-[16px] rounded-tr-none shadow-sm min-w-[120px] max-w-[85%]">
               <div className="absolute top-0 -right-2 w-3 h-3 bg-[#d9fdd3] clip-path-tail-right-top"></div>
               <p className="text-[15px] font-normal leading-relaxed pr-2">
@@ -186,8 +182,8 @@ export default function Home() {
         )}
 
         {/* Quick Reply Buttons */}
-        {!userChoice && visibleMessages >= 2 && (
-          <div className="flex flex-wrap gap-2 justify-center py-4 animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-both">
+        {!userChoice && visibleMessages >= 2 && !isTyping && (
+          <div className="flex flex-wrap gap-2 justify-center py-6 animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-both">
             <Button 
               onClick={() => handleChoice("Celular ANDROID")}
               className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-5 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
