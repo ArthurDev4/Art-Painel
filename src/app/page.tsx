@@ -112,18 +112,6 @@ export default function Home() {
           </span>
         </div>
 
-        {/* Business Info Message */}
-        <div className="flex justify-center w-full mb-4 animate-in fade-in slide-in-from-top-4 duration-500 fill-mode-both">
-          <div className="bg-[#d1f4ff] text-[#111b21] p-3 px-4 rounded-[14px] flex items-center gap-3 shadow-sm border border-[#b3e5f2] max-w-[95%] md:max-w-md">
-            <div className="bg-[#54656f] rounded-full w-5 h-5 flex items-center justify-center shrink-0">
-               <span className="text-[#d1f4ff] font-bold text-[13px] leading-none mb-0.5">!</span>
-            </div>
-            <p className="text-[13.5px] leading-snug">
-              Essa empresa usa uma Conta Comercial verificada pela meta
-            </p>
-          </div>
-        </div>
-
         {/* Bot Message Group */}
         <div className="space-y-1.5 w-full max-w-[95%] md:max-w-[75%]">
           {/* Typing for Message 1 */}
