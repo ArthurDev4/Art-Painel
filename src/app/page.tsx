@@ -41,14 +41,14 @@ export default function Home() {
       {/* Chat Area */}
       <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-4 max-w-3xl mx-auto w-full">
         {/* Date Divider */}
-        <div className="flex justify-center my-6 animate-in fade-in zoom-in duration-500 delay-200 fill-mode-both">
+        <div className="flex justify-center my-6 animate-in fade-in zoom-in duration-500 delay-[2500ms] fill-mode-both">
           <span className="bg-[#182229] text-[#8696a0] text-xs px-3 py-1.5 rounded-lg shadow-sm font-medium uppercase tracking-wider">
             Hoje
           </span>
         </div>
 
         {/* Business Info Message */}
-        <div className="flex justify-center max-w-sm mx-auto animate-in fade-in slide-in-from-top-4 duration-500 delay-500 fill-mode-both">
+        <div className="flex justify-center max-w-sm mx-auto animate-in fade-in slide-in-from-top-4 duration-500 delay-[3000ms] fill-mode-both">
           <div className="bg-[#d1f4ff] text-[#111b21] p-3 rounded-xl flex items-start gap-3 shadow-sm border border-[#b3e5f2]">
             <Info className="w-5 h-5 text-[#00a884] shrink-0 mt-0.5" />
             <p className="text-[13px] leading-tight">
@@ -58,7 +58,7 @@ export default function Home() {
         </div>
 
         {/* Message 1 */}
-        <div className="flex items-end gap-2 max-w-[85%] animate-in fade-in slide-in-from-left-6 duration-500 delay-1000 fill-mode-both">
+        <div className="flex items-end gap-2 max-w-[85%] animate-in fade-in slide-in-from-left-6 duration-500 delay-[100ms] fill-mode-both">
           <div className="w-8 h-8 rounded-full bg-[#005c4b] hidden sm:flex items-center justify-center overflow-hidden shrink-0 border border-white/10">
             <Image 
               src="https://picsum.photos/seed/elite/100/100" 
@@ -79,7 +79,7 @@ export default function Home() {
         </div>
 
         {/* Message 2 */}
-        <div className="flex items-end gap-2 max-w-[85%] animate-in fade-in slide-in-from-left-6 duration-500 delay-[1800ms] fill-mode-both">
+        <div className="flex items-end gap-2 max-w-[85%] animate-in fade-in slide-in-from-left-6 duration-500 delay-[1000ms] fill-mode-both">
           <div className="w-8 h-8 rounded-full bg-[#005c4b] hidden sm:flex items-center justify-center overflow-hidden shrink-0 border border-white/10">
             <Image 
               src="https://picsum.photos/seed/elite/100/100" 
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
 
         {/* Quick Reply Buttons */}
-        <div className="flex flex-wrap gap-2 justify-center py-4 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-[2600ms] fill-mode-both">
+        <div className="flex flex-wrap gap-2 justify-center py-4 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-[1800ms] fill-mode-both">
           <Button className="bg-[#005c4b] hover:bg-[#004d3f] text-white rounded-full px-6 py-6 h-auto font-bold text-sm shadow-lg transition-transform active:scale-95 border-none">
             Celular ANDROID
           </Button>
