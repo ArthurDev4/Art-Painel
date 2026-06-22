@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { MoreVertical, CheckCircle2, Info } from 'lucide-react';
+import { MoreVertical, CheckCircle2, Info, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
@@ -63,7 +63,7 @@ export default function Home() {
           </span>
         </div>
 
-        {/* Business Info Message - Exactly like screenshot */}
+        {/* Business Info Message */}
         <div className="flex justify-center w-full mb-4 animate-in fade-in slide-in-from-top-4 duration-500 delay-200 fill-mode-both">
           <div className="bg-[#d1f4ff] text-[#111b21] p-3 px-4 rounded-[14px] flex items-center gap-3 shadow-sm border border-[#b3e5f2] max-w-[90%] md:max-w-md">
             <div className="bg-[#54656f] rounded-full p-0.5 shrink-0">
@@ -79,7 +79,7 @@ export default function Home() {
         <div className="space-y-1 w-full max-w-[90%] md:max-w-[70%]">
           {/* Message 1 */}
           <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 delay-500 fill-mode-both">
-            <div className="w-8 h-8 shrink-0 opacity-0"></div> {/* Spacer for alignment */}
+            <div className="w-8 h-8 shrink-0 opacity-0"></div>
             <div className="relative bg-white text-[#111b21] p-2.5 px-3 rounded-[12px] shadow-sm">
               <div className="absolute top-0 -left-1.5 w-3 h-3 bg-white clip-path-tail-left-top"></div>
               <p className="text-[14.5px] leading-relaxed">
@@ -90,7 +90,7 @@ export default function Home() {
           </div>
 
           {/* Message 2 + Avatar */}
-          <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 delay-1500 fill-mode-both">
+          <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 delay-1000 fill-mode-both">
             <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 border border-white/10 shadow-md">
               <Image 
                 src="https://picsum.photos/seed/elite-logo/100/100" 
@@ -111,18 +111,22 @@ export default function Home() {
           </div>
         </div>
 
-        {/* User Response Message */}
+        {/* User Response Message - EXACTLY AS IMAGE */}
         {userChoice && (
           <div className="flex justify-end w-full mt-4 animate-in fade-in slide-in-from-right-6 duration-300 fill-mode-both">
-            <div className="relative bg-[#d9fdd3] text-[#111b21] p-2.5 px-3 rounded-[12px] shadow-sm max-w-[85%]">
-              <div className="absolute top-0 -right-1.5 w-3 h-3 bg-[#d9fdd3] clip-path-tail-right-top"></div>
-              <p className="text-[14.5px] font-medium leading-relaxed">
+            <div className="relative bg-[#d9fdd3] text-[#111b21] py-2 px-3 rounded-[12px] rounded-tr-none shadow-sm min-w-[120px] max-w-[85%]">
+              {/* Tail at the top right */}
+              <div className="absolute top-0 -right-2 w-3 h-3 bg-[#d9fdd3] clip-path-tail-right-top"></div>
+              
+              <p className="text-[15px] font-normal leading-relaxed pr-2">
                 {userChoice}
               </p>
-              <div className="flex items-center justify-end gap-1 mt-1">
-                <span className="text-[11px] text-[#667781] font-normal">{currentTime}</span>
-                <div className="flex">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-sky-500 fill-sky-500 text-transparent" />
+              
+              <div className="flex items-center justify-end gap-0.5 mt-0.5">
+                <span className="text-[10.5px] text-[#667781] font-normal">{currentTime}</span>
+                <div className="flex -space-x-2">
+                  <Check className="w-3.5 h-3.5 text-[#53bdeb]" strokeWidth={3} />
+                  <Check className="w-3.5 h-3.5 text-[#53bdeb]" strokeWidth={3} />
                 </div>
               </div>
             </div>
@@ -131,7 +135,7 @@ export default function Home() {
 
         {/* Quick Reply Buttons */}
         {!userChoice && (
-          <div className="flex flex-col items-center gap-3 pt-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-2500 fill-mode-both">
+          <div className="flex flex-col items-center gap-3 pt-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-1500 fill-mode-both">
             <div className="flex flex-wrap gap-2 justify-center">
               <Button 
                 onClick={() => handleChoice("Celular ANDROID")}
