@@ -1,17 +1,16 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Github, Twitter, Linkedin, Youtube, Music, Instagram, ArrowRight, Settings, BarChart3, Wand2 } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Github, Twitter, Linkedin, Youtube, Music, Instagram, ArrowRight, Settings, BarChart3, Wand2, MessageCircle } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const LINKS = [
+  { name: 'WhatsApp Elite', icon: MessageCircle, url: '/chat', color: 'text-emerald-400', internal: true },
   { name: 'GitHub', icon: Github, url: 'https://github.com', color: 'text-white' },
   { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com', color: 'text-blue-400' },
   { name: 'Twitter', icon: Twitter, url: 'https://twitter.com', color: 'text-cyan-400' },
   { name: 'YouTube', icon: Youtube, url: 'https://youtube.com', color: 'text-red-500' },
-  { name: 'Spotify', icon: Music, url: 'https://spotify.com', color: 'text-green-500' },
   { name: 'Instagram', icon: Instagram, url: 'https://instagram.com', color: 'text-pink-500' },
 ];
 
@@ -62,9 +61,9 @@ export default function Home() {
           Product Designer & Creative Engineer. Crafting digital experiences that pulse with energy and purpose.
         </p>
         <div className="flex gap-4">
-          <Link href="/editor">
-            <Button className="rounded-full px-6 font-medium gap-2">
-              <Wand2 className="w-4 h-4" /> AI Bio Assistant
+          <Link href="/chat">
+            <Button className="rounded-full px-6 font-medium gap-2 bg-emerald-600 hover:bg-emerald-700">
+              <MessageCircle className="w-4 h-4" /> Ver Novo Chat
             </Button>
           </Link>
         </div>
@@ -78,7 +77,7 @@ export default function Home() {
             className="group glass-card glow-hover border-white/5 overflow-hidden transition-all hover:-translate-y-1"
             style={{ animationDelay: `${i * 100}ms` }}
           >
-            <Link href={link.url} target="_blank" className="block p-6">
+            <Link href={link.url} target={link.internal ? undefined : "_blank"} className="block p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className={`p-3 rounded-xl bg-secondary ${link.color}`}>
                   <link.icon className="w-6 h-6" />
@@ -86,41 +85,10 @@ export default function Home() {
                 <ArrowRight className="w-5 h-5 text-muted-foreground transition-transform group-hover:translate-x-1" />
               </div>
               <h3 className="text-xl font-headline font-semibold mb-1">{link.name}</h3>
-              <p className="text-sm text-muted-foreground">Follow my latest updates and projects on {link.name}.</p>
+              <p className="text-sm text-muted-foreground">Acesse meu {link.name} oficial.</p>
             </Link>
           </Card>
         ))}
-        
-        {/* Interactive Embed Preview Simulation */}
-        <Card className="md:col-span-2 glass-card border-white/5 p-6 hover:border-primary/50 transition-colors">
-          <div className="flex items-center gap-3 mb-4">
-            <Youtube className="w-6 h-6 text-red-500" />
-            <h3 className="text-xl font-headline font-semibold">Latest YouTube Feature</h3>
-          </div>
-          <div className="aspect-video bg-muted rounded-xl overflow-hidden relative border border-white/5">
-             <Image 
-                src="https://picsum.photos/seed/yt-preview/800/450" 
-                alt="Video Preview"
-                fill
-                className="object-cover opacity-60 hover:opacity-100 transition-opacity"
-                data-ai-hint="video thumbnail"
-             />
-             <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
-                  <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-white border-b-[10px] border-b-transparent ml-1" />
-                </div>
-             </div>
-          </div>
-        </Card>
-
-        <Card className="glass-card border-white/5 p-6 flex flex-col justify-center text-center items-center">
-           <BarChart3 className="w-10 h-10 text-accent mb-4" />
-           <h3 className="text-lg font-headline font-semibold mb-1">Live Stats</h3>
-           <p className="text-xs text-muted-foreground mb-4">You've had 1,248 visits this week!</p>
-           <Link href="/dashboard" className="w-full">
-             <Button variant="outline" size="sm" className="w-full rounded-full">View Dashboard</Button>
-           </Link>
-        </Card>Section
       </section>
 
       <footer className="mt-32 text-center text-muted-foreground text-sm">
