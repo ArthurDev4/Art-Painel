@@ -1,99 +1,121 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Github, Twitter, Linkedin, Youtube, Music, Instagram, ArrowRight, Settings, BarChart3, Wand2, MessageCircle } from 'lucide-react';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-const LINKS = [
-  { name: 'WhatsApp Elite', icon: MessageCircle, url: '/chat', color: 'text-emerald-400', internal: true },
-  { name: 'GitHub', icon: Github, url: 'https://github.com', color: 'text-white' },
-  { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com', color: 'text-blue-400' },
-  { name: 'Twitter', icon: Twitter, url: 'https://twitter.com', color: 'text-cyan-400' },
-  { name: 'YouTube', icon: Youtube, url: 'https://youtube.com', color: 'text-red-500' },
-  { name: 'Instagram', icon: Instagram, url: 'https://instagram.com', color: 'text-pink-500' },
-];
+"use client";
+
+import React from 'react';
+import Image from 'next/image';
+import { MoreVertical, CheckCircle2, Info } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
-  const profileImg = PlaceHolderImages.find(img => img.id === 'profile-avatar');
-
   return (
-    <main className="min-h-screen relative flex flex-col items-center pt-20 pb-20 px-4 md:px-0">
-      {/* Background Decor */}
-      <div className="fixed inset-0 pointer-events-none opacity-20 -z-10">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px]" />
-      </div>
-
-      {/* Floating Action Menu */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 flex items-center gap-2 p-1.5 glass-card rounded-full z-50">
-        <Link href="/">
-          <Button variant="ghost" size="sm" className="rounded-full">Home</Button>
-        </Link>
-        <Link href="/editor">
-          <Button variant="ghost" size="sm" className="rounded-full gap-2">
-            <Settings className="w-4 h-4" /> Edit Profile
-          </Button>
-        </Link>
-        <Link href="/dashboard">
-          <Button variant="ghost" size="sm" className="rounded-full gap-2">
-            <BarChart3 className="w-4 h-4" /> Insights
-          </Button>
-        </Link>
-      </nav>
-
-      {/* Profile Header */}
-      <header className="flex flex-col items-center mb-12 animate-in fade-in slide-in-from-top-4 duration-700">
-        <div className="relative group mb-6">
-          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-40 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
-          <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-border shadow-2xl">
-            <Image
-              src={profileImg?.imageUrl || ''}
-              alt="Profile"
-              width={112}
-              height={112}
-              className="object-cover"
-              priority
-            />
+    <div className="flex flex-col h-screen whatsapp-bg overflow-hidden font-body">
+      {/* WhatsApp Header */}
+      <header className="bg-[#202c33] text-white px-4 py-3 flex items-center justify-between shadow-md z-10">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <div className="w-10 h-10 rounded-full bg-[#005c4b] flex items-center justify-center overflow-hidden border border-white/10">
+              <Image 
+                src="https://picsum.photos/seed/elite/100/100" 
+                alt="Elite Xiters" 
+                width={40} 
+                height={40}
+                className="object-cover"
+                data-ai-hint="gaming avatar"
+              />
+            </div>
+            <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-[#202c33] rounded-full"></div>
+          </div>
+          <div className="flex flex-col">
+            <div className="flex items-center gap-1">
+              <span className="font-semibold text-[15px]">ELITE XITERS</span>
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 text-white" />
+            </div>
+            <span className="text-xs text-emerald-500">online</span>
           </div>
         </div>
-        <h1 className="text-4xl md:text-5xl font-headline font-bold mb-2 text-center">Alex Rivera</h1>
-        <p className="text-muted-foreground text-lg mb-4 text-center max-w-md px-4">
-          Product Designer & Creative Engineer. Crafting digital experiences that pulse with energy and purpose.
-        </p>
-        <div className="flex gap-4">
-          <Link href="/chat">
-            <Button className="rounded-full px-6 font-medium gap-2 bg-emerald-600 hover:bg-emerald-700">
-              <MessageCircle className="w-4 h-4" /> Ver Novo Chat
-            </Button>
-          </Link>
-        </div>
+        <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 rounded-full">
+          <MoreVertical className="w-5 h-5" />
+        </Button>
       </header>
 
-      {/* Link Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4">
-        {LINKS.map((link, i) => (
-          <Card 
-            key={link.name} 
-            className="group glass-card glow-hover border-white/5 overflow-hidden transition-all hover:-translate-y-1"
-            style={{ animationDelay: `${i * 100}ms` }}
-          >
-            <Link href={link.url} target={link.internal ? undefined : "_blank"} className="block p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className={`p-3 rounded-xl bg-secondary ${link.color}`}>
-                  <link.icon className="w-6 h-6" />
-                </div>
-                <ArrowRight className="w-5 h-5 text-muted-foreground transition-transform group-hover:translate-x-1" />
-              </div>
-              <h3 className="text-xl font-headline font-semibold mb-1">{link.name}</h3>
-              <p className="text-sm text-muted-foreground">Acesse meu {link.name} oficial.</p>
-            </Link>
-          </Card>
-        ))}
-      </section>
+      {/* Chat Area */}
+      <main className="flex-1 overflow-y-auto p-4 md:p-8 space-y-4 max-w-3xl mx-auto w-full">
+        {/* Date Divider */}
+        <div className="flex justify-center my-6">
+          <span className="bg-[#182229] text-[#8696a0] text-xs px-3 py-1.5 rounded-lg shadow-sm font-medium uppercase tracking-wider">
+            Hoje
+          </span>
+        </div>
 
-      <footer className="mt-32 text-center text-muted-foreground text-sm">
-        <p>© 2024 PulseFolio. Built for high-impact professionals.</p>
-      </footer>
-    </main>
+        {/* Business Info Message */}
+        <div className="flex justify-center max-w-sm mx-auto">
+          <div className="bg-[#d1f4ff] text-[#111b21] p-3 rounded-xl flex items-start gap-3 shadow-sm border border-[#b3e5f2]">
+            <Info className="w-5 h-5 text-[#00a884] shrink-0 mt-0.5" />
+            <p className="text-[13px] leading-tight">
+              Essa empresa usa uma Conta Comercial verificada pela Meta.
+            </p>
+          </div>
+        </div>
+
+        {/* Message 1 */}
+        <div className="flex items-end gap-2 max-w-[85%] animate-in fade-in slide-in-from-left-4 duration-500">
+          <div className="w-8 h-8 rounded-full bg-[#005c4b] hidden sm:flex items-center justify-center overflow-hidden shrink-0 border border-white/10">
+            <Image 
+              src="https://picsum.photos/seed/elite/100/100" 
+              alt="Avatar" 
+              width={32} 
+              height={32} 
+              data-ai-hint="company logo"
+            />
+          </div>
+          <div className="relative bg-white text-black p-3.5 rounded-2xl rounded-bl-none shadow-md">
+            {/* Message tail */}
+            <div className="absolute bottom-0 -left-2 w-4 h-4 bg-white clip-path-tail-left"></div>
+            <p className="text-[14.5px] font-medium leading-relaxed">
+              🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥
+            </p>
+            <div className="text-[10px] text-[#667781] text-right mt-1 font-medium">16:45</div>
+          </div>
+        </div>
+
+        {/* Message 2 */}
+        <div className="flex items-end gap-2 max-w-[85%] animate-in fade-in slide-in-from-left-4 duration-500 delay-300">
+          <div className="w-8 h-8 rounded-full bg-[#005c4b] hidden sm:flex items-center justify-center overflow-hidden shrink-0 border border-white/10">
+            <Image 
+              src="https://picsum.photos/seed/elite/100/100" 
+              alt="Avatar" 
+              width={32} 
+              height={32} 
+              data-ai-hint="company logo"
+            />
+          </div>
+          <div className="bg-white text-black p-3.5 rounded-2xl rounded-bl-none shadow-md">
+            <p className="text-[14.5px] font-medium leading-relaxed">
+              Para resgatar seu cupom, basta selecionar abaixo qual é o seu dispositivo:
+            </p>
+            <div className="text-[10px] text-[#667781] text-right mt-1 font-medium">16:45</div>
+          </div>
+        </div>
+
+        {/* Quick Reply Buttons */}
+        <div className="flex flex-wrap gap-2 justify-center py-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
+          <Button className="bg-[#005c4b] hover:bg-[#004d3f] text-white rounded-full px-6 py-6 h-auto font-bold text-sm shadow-lg transition-transform active:scale-95 border-none">
+            Celular ANDROID
+          </Button>
+          <Button className="bg-[#005c4b] hover:bg-[#004d3f] text-white rounded-full px-6 py-6 h-auto font-bold text-sm shadow-lg transition-transform active:scale-95 border-none">
+            Celular IOS
+          </Button>
+          <Button className="bg-[#005c4b] hover:bg-[#004d3f] text-white rounded-full px-6 py-6 h-auto font-bold text-sm shadow-lg transition-transform active:scale-95 border-none">
+            Emulador
+          </Button>
+        </div>
+      </main>
+
+      <style jsx>{`
+        .clip-path-tail-left {
+          clip-path: polygon(100% 0, 100% 100%, 0 100%);
+        }
+      `}</style>
+    </div>
   );
 }
