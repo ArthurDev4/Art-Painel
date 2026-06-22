@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { MoreVertical, CheckCircle2, Info, Check } from 'lucide-react';
+import { MoreVertical, CheckCircle2, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
@@ -66,8 +66,8 @@ export default function Home() {
         {/* Business Info Message */}
         <div className="flex justify-center w-full mb-4 animate-in fade-in slide-in-from-top-4 duration-500 delay-200 fill-mode-both">
           <div className="bg-[#d1f4ff] text-[#111b21] p-3 px-4 rounded-[14px] flex items-center gap-3 shadow-sm border border-[#b3e5f2] max-w-[90%] md:max-w-md">
-            <div className="bg-[#54656f] rounded-full p-0.5 shrink-0">
-               <Info className="w-4 h-4 text-[#d1f4ff] fill-current" />
+            <div className="bg-[#54656f] rounded-full w-5 h-5 flex items-center justify-center shrink-0">
+               <span className="text-[#d1f4ff] font-bold text-[13px] leading-none mb-0.5">!</span>
             </div>
             <p className="text-[13.5px] leading-snug">
               Essa empresa usa uma Conta Comercial verificada pela meta
