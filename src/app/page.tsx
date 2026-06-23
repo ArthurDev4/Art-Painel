@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Check, CheckCircle2, MoreVertical, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-// SVG para a cauda do balão estilo WhatsApp
+// SVG para a cauda do balão estilo WhatsApp original
 const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?: "left" | "right" }) => (
   <svg 
     className={`absolute top-0 ${side === 'left' ? '-left-[8px]' : '-right-[8px]'} w-2.5 h-3`} 
@@ -124,7 +124,7 @@ export default function Home() {
 
   return (
     <div className="whatsapp-bg flex flex-col h-screen overflow-hidden font-body selection:bg-[#00a884]/30">
-      {/* WhatsApp Header */}
+      {/* WhatsApp Header - Mantido Conforme Solicitado */}
       <header className="relative z-10 bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
