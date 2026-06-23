@@ -125,6 +125,13 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2500));
     setIsTyping(false);
     setAfterChoiceVisible(3);
+
+    // Nova mensagem após o vídeo
+    await new Promise(r => setTimeout(r, 5000));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 2000));
+    setIsTyping(false);
+    setAfterChoiceVisible(4);
   };
 
   return (
@@ -241,7 +248,7 @@ export default function Home() {
 
           {afterChoiceVisible >= 3 && (
             <BotMessage 
-              showAvatar={true}
+              showAvatar={false}
               isFirst={false}
               time={currentTime}
               noPadding={true}
@@ -258,6 +265,15 @@ export default function Home() {
                   ></iframe>
                 </div>
               }
+            />
+          )}
+
+          {afterChoiceVisible >= 4 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={false}
+              time={currentTime}
+              content={<>E aí, gostou? Ficou interessado? Se sim, é só clicar no botão abaixo para conferir os valores. 👇</>}
             />
           )}
           
