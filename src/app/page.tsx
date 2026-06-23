@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { Check, CheckCircle2, MoreVertical, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-// SVG para a cauda do balão estilo WhatsApp original
+// SVG para a cauda do balão estilo WhatsApp original (preciso, sem artefatos)
 const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?: "left" | "right" }) => (
   <svg 
-    className={`absolute top-0 ${side === 'left' ? '-left-[8px]' : '-right-[8px]'} w-2.5 h-3`} 
+    className={`absolute top-0 ${side === 'left' ? '-left-[8px]' : '-right-[8px]'} w-2.5 h-3 z-10`} 
     viewBox="0 0 10 14" 
     style={{ fill: color }}
   >
@@ -20,7 +20,7 @@ const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?
   </svg>
 );
 
-const BotMessage = ({ content, time, showAvatar }: { content: React.ReactNode, time: string, showAvatar: boolean }) => (
+const BotMessage = ({ content, time, showAvatar, isFirst }: { content: React.ReactNode, time: string, showAvatar: boolean, isFirst?: boolean }) => (
   <div className="flex items-start gap-2 mb-3 animate-in fade-in slide-in-from-left-4 duration-500">
     <div className="w-8 h-8 shrink-0 flex items-center justify-center mt-auto mb-1">
       {showAvatar && (
@@ -36,8 +36,8 @@ const BotMessage = ({ content, time, showAvatar }: { content: React.ReactNode, t
         </div>
       )}
     </div>
-    <div className={`relative bg-white text-[#111b21] p-2.5 px-3.5 rounded-[12px] shadow-sm flex-1 max-w-[85%] rounded-tl-none`}>
-      <MessageTail color="white" side="left" />
+    <div className={`relative bg-white text-[#111b21] p-2.5 px-3.5 rounded-[12px] shadow-sm flex-1 max-w-[85%] ${isFirst ? 'rounded-tl-none' : ''}`}>
+      {isFirst && <MessageTail color="white" side="left" />}
       <div className="text-[14.5px] leading-relaxed font-normal">
         {content}
       </div>
@@ -123,9 +123,20 @@ export default function Home() {
   };
 
   return (
-    <div className="whatsapp-bg flex flex-col h-screen overflow-hidden font-body selection:bg-[#00a884]/30">
-      {/* WhatsApp Header - Mantido Conforme Solicitado */}
-      <header className="relative z-10 bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
+    <div className="relative flex flex-col h-screen overflow-hidden font-body bg-[#0b141a]">
+      {/* Camada da Imagem de Fundo Solicitada */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0" 
+        style={{ 
+          backgroundImage: 'url("https://i.postimg.cc/66L9W7qC/image3231-1.png")',
+          backgroundRepeat: 'repeat',
+          backgroundSize: '400px',
+          opacity: 0.12
+        }} 
+      />
+
+      {/* WhatsApp Header */}
+      <header className="relative z-20 bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
             <Image 
@@ -142,7 +153,7 @@ export default function Home() {
               <span className="font-semibold text-[15px] uppercase tracking-wide">ELITE XITERS</span>
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 text-[#202c33]" />
             </div>
-            <span className="text-[12px] text-emerald-500 leading-none">online</span>
+            <span className="text-[12px] text-emerald-500 leading-none font-medium">online</span>
           </div>
         </div>
         <Button variant="ghost" size="icon" className="text-[#aebac1] hover:bg-white/5 rounded-full">
@@ -173,7 +184,8 @@ export default function Home() {
         <div className="w-full">
           {visibleMessages >= 1 && (
             <BotMessage 
-              showAvatar={true}
+              showAvatar={false}
+              isFirst={true}
               time={currentTime}
               content={
                 <>🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥</>
@@ -184,6 +196,7 @@ export default function Home() {
           {visibleMessages >= 2 && (
             <BotMessage 
               showAvatar={true}
+              isFirst={false}
               time={currentTime}
               content={<>Para resgatar seu cupom, basta selecionar abaixo qual é o seu dispositivo:</>}
             />
@@ -213,7 +226,8 @@ export default function Home() {
         <div className="w-full mt-2">
           {afterChoiceVisible >= 1 && (
             <BotMessage 
-              showAvatar={true}
+              showAvatar={false}
+              isFirst={true}
               time={currentTime}
               content={
                 <>✅ <strong>Seu CUPOM foi resgatado com sucesso!</strong></>
@@ -224,6 +238,7 @@ export default function Home() {
           {afterChoiceVisible >= 2 && (
             <BotMessage 
               showAvatar={true}
+              isFirst={false}
               time={currentTime}
               content={<>Agora, vou te enviar um vídeo demonstrativo. Assiste com atenção para ver o PAINEL na prática! 👇</>}
             />
