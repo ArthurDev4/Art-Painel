@@ -213,7 +213,7 @@ export default function Home() {
   const [finalChoice, setFinalChoice] = useState<string | null>(null);
   const [finalAction, setFinalAction] = useState<string | null>(null);
   const [feedbackAction, setFeedbackAction] = useState<string | null>(null);
-  const [finalActionAgain, setFinalActionAgain] = useState<string | null>(null);
+  const [versionChoice, setVersionChoice] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState("");
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [afterChoiceVisible, setAfterChoiceVisible] = useState<number>(0);
@@ -248,7 +248,7 @@ export default function Home() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, returnToPricesVisible, isTyping, userChoice, finalChoice, finalAction, feedbackAction, finalActionAgain]);
+  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, returnToPricesVisible, isTyping, userChoice, finalChoice, finalAction, feedbackAction, versionChoice]);
 
   const handleChoice = async (choice: string) => {
     setUserChoice(choice);
@@ -379,13 +379,16 @@ export default function Home() {
       setIsTyping(false);
       setReturnToPricesVisible(2);
 
-      await new Promise(r => setTimeout(r, 1200));
+      await new Promise(r => setTimeout(r, 1500));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 2000));
+      setIsTyping(false);
       setReturnToPricesVisible(3);
     }
   };
 
-  const handleFinalActionAgain = (action: string) => {
-    setFinalActionAgain(action);
+  const handleVersionChoice = (choice: string) => {
+    setVersionChoice(choice);
   };
 
   return (
@@ -583,7 +586,7 @@ export default function Home() {
               showAvatar={true}
               isFirst={false}
               time={currentTime}
-              content={<>Seleciona uma opção abaixo para continuar: 👇</>}
+              content={<>Agora selecione abaixo qual versão você deseja comprar: 👇</>}
             />
           )}
 
@@ -741,8 +744,17 @@ export default function Home() {
             />
           )}
 
-          {finalActionAgain && (
-            <UserMessage content={finalActionAgain} time={currentTime} />
+          {returnToPricesVisible >= 3 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={false}
+              time={currentTime}
+              content={<>Agora selecione abaixo qual versão você deseja comprar: 👇</>}
+            />
+          )}
+
+          {versionChoice && (
+            <UserMessage content={versionChoice} time={currentTime} />
           )}
 
           {isTyping && <TypingIndicator />}
@@ -775,12 +787,24 @@ export default function Home() {
 
         {finalResponseVisible >= 5 && !finalAction && !isTyping && (
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex flex-wrap gap-2.5 justify-end max-w-[500px]">
+            <div className="flex flex-wrap gap-2.5 justify-end max-w-[600px]">
               <Button 
-                onClick={() => handleFinalAction("Partir para o Pagamento")}
+                onClick={() => handleVersionChoice("🎁 Versão Permanente na PROMOÇÃO")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
-                Partir para o Pagamento
+                🎁 Versão Permanente na PROMOÇÃO
+              </Button>
+              <Button 
+                onClick={() => handleVersionChoice("Versão MEDIUM (30 Dias)")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              >
+                Versão MEDIUM (30 Dias)
+              </Button>
+              <Button 
+                onClick={() => handleVersionChoice("Versão BASIC (7 Dias)")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              >
+                Versão BASIC (7 Dias)
               </Button>
               <Button 
                 onClick={() => handleFinalAction("Ver Feedbacks de Clientes")}
@@ -805,20 +829,26 @@ export default function Home() {
           </div>
         )}
 
-        {returnToPricesVisible >= 3 && !finalActionAgain && !isTyping && (
+        {returnToPricesVisible >= 3 && !versionChoice && !isTyping && (
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex flex-wrap gap-2.5 justify-end max-w-[500px]">
+            <div className="flex flex-wrap gap-2.5 justify-end max-w-[600px]">
               <Button 
-                onClick={() => handleFinalActionAgain("Partir para o Pagamento")}
+                onClick={() => handleVersionChoice("🎁 Versão Permanente na PROMOÇÃO")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
-                Partir para o Pagamento
+                🎁 Versão Permanente na PROMOÇÃO
               </Button>
               <Button 
-                onClick={() => handleFinalActionAgain("Ver Feedbacks de Clientes")}
+                onClick={() => handleVersionChoice("Versão MEDIUM (30 Dias)")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
-                Ver Feedbacks de Clientes
+                Versão MEDIUM (30 Dias)
+              </Button>
+              <Button 
+                onClick={() => handleVersionChoice("Versão BASIC (7 Dias)")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              >
+                Versão BASIC (7 Dias)
               </Button>
             </div>
           </div>
