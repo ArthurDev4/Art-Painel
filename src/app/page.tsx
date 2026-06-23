@@ -156,7 +156,7 @@ const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: {
         </div>
       )}
     </div>
-    <div className={`relative bg-white text-[#111b21] rounded-[12px] shadow-sm max-w-[85%] w-fit ${isFirst ? 'rounded-tl-none' : ''} ${noPadding ? 'p-0.5 overflow-hidden' : 'p-2.5 px-3.5'}`}>
+    <div className={`relative bg-white text-[#111b21] rounded-[12px] shadow-sm w-fit ${isFirst ? 'rounded-tl-none' : ''} ${noPadding ? 'p-0.5 overflow-hidden max-w-fit' : 'p-2.5 px-3.5 max-w-[85%]'}`}>
       {isFirst && <MessageTail color="white" side="left" />}
       <div className={`text-[14.5px] leading-relaxed font-normal`}>
         {content}
@@ -336,9 +336,15 @@ export default function Home() {
 
       await new Promise(r => setTimeout(r, 5000));
       setIsTyping(true);
-      await new Promise(r => setTimeout(r, 1500));
+      await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
       setFeedbackResponseVisible(4);
+
+      await new Promise(r => setTimeout(r, 5000));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 1500));
+      setIsTyping(false);
+      setFeedbackResponseVisible(5);
     }
   };
 
@@ -577,7 +583,7 @@ export default function Home() {
                 <div className="aspect-[9/20] w-[240px] bg-black rounded-[8px] overflow-hidden">
                    <iframe 
                     src="https://fast.wistia.net/embed/iframe/o3twreve7o?videoFoam=true" 
-                    title="Feedback Clientes Elite Xiters"
+                    title="Feedback Clientes Elite Xiters 1"
                     allow="autoplay; fullscreen" 
                     frameBorder="0" 
                     scrolling="no" 
@@ -589,6 +595,27 @@ export default function Home() {
           )}
 
           {feedbackResponseVisible >= 4 && (
+            <BotMessage 
+              showAvatar={false}
+              isFirst={false}
+              time={currentTime}
+              noPadding={true}
+              content={
+                <div className="aspect-[9/20] w-[240px] bg-black rounded-[8px] overflow-hidden">
+                   <iframe 
+                    src="https://fast.wistia.net/embed/iframe/f4aqsc4s1n?videoFoam=true" 
+                    title="Feedback Clientes Elite Xiters 2"
+                    allow="autoplay; fullscreen" 
+                    frameBorder="0" 
+                    scrolling="no" 
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
+              }
+            />
+          )}
+
+          {feedbackResponseVisible >= 5 && (
             <BotMessage 
               showAvatar={true}
               isFirst={false}
@@ -658,3 +685,4 @@ export default function Home() {
     </div>
   );
 }
+
