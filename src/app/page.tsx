@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 // SVG para a cauda do balão estilo WhatsApp
 const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?: "left" | "right" }) => (
   <svg 
-    className={`absolute top-0 ${side === 'left' ? '-left-[8px]' : '-right-[8px]'} w-2 h-3`} 
+    className={`absolute top-0 ${side === 'left' ? '-left-[8px]' : '-right-[8px]'} w-2.5 h-3`} 
     viewBox="0 0 10 14" 
     style={{ fill: color }}
   >
@@ -20,8 +20,8 @@ const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?
   </svg>
 );
 
-const BotMessage = ({ content, time, showAvatar, isFirst }: { content: React.ReactNode, time: string, showAvatar: boolean, isFirst: boolean }) => (
-  <div className="flex items-start gap-2 mb-1 animate-in fade-in slide-in-from-left-4 duration-500">
+const BotMessage = ({ content, time, showAvatar }: { content: React.ReactNode, time: string, showAvatar: boolean }) => (
+  <div className="flex items-start gap-2 mb-3 animate-in fade-in slide-in-from-left-4 duration-500">
     <div className="w-8 h-8 shrink-0 flex items-center justify-center mt-auto mb-1">
       {showAvatar && (
         <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shadow-sm border border-white/10">
@@ -36,8 +36,8 @@ const BotMessage = ({ content, time, showAvatar, isFirst }: { content: React.Rea
         </div>
       )}
     </div>
-    <div className={`relative bg-white text-[#111b21] p-2.5 px-3.5 rounded-[12px] shadow-sm flex-1 max-w-[85%] ${isFirst ? 'rounded-tl-none' : ''}`}>
-      {isFirst && <MessageTail color="white" side="left" />}
+    <div className={`relative bg-white text-[#111b21] p-2.5 px-3.5 rounded-[12px] shadow-sm flex-1 max-w-[85%] rounded-tl-none`}>
+      <MessageTail color="white" side="left" />
       <div className="text-[14.5px] leading-relaxed font-normal">
         {content}
       </div>
@@ -47,20 +47,22 @@ const BotMessage = ({ content, time, showAvatar, isFirst }: { content: React.Rea
 );
 
 const TypingIndicator = () => (
-  <div className="flex items-end gap-2 mb-2 animate-in fade-in duration-300">
-    <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-sm border border-white/10">
-      <Image 
-        src="https://picsum.photos/seed/elite-logo/100/100" 
-        alt="Avatar" 
-        width={32} 
-        height={32} 
-        className="object-cover"
-        data-ai-hint="company logo"
-      />
+  <div className="flex items-start gap-2 mb-3 animate-in fade-in duration-300">
+    <div className="w-8 h-8 shrink-0 flex items-center justify-center mt-auto mb-1">
+      <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shadow-sm border border-white/10">
+        <Image 
+          src="https://picsum.photos/seed/elite-logo/100/100" 
+          alt="Avatar" 
+          width={32} 
+          height={32} 
+          className="object-cover"
+          data-ai-hint="company logo"
+        />
+      </div>
     </div>
-    <div className="relative bg-white py-2.5 px-4 rounded-[12px] shadow-sm flex items-center justify-center min-w-[55px]">
+    <div className="relative bg-white py-3 px-4 rounded-[12px] rounded-tl-none shadow-sm flex items-center justify-center min-w-[55px]">
       <MessageTail color="white" side="left" />
-      <div className="flex gap-1">
+      <div className="flex gap-1.5">
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce"></div>
@@ -148,7 +150,7 @@ export default function Home() {
         </Button>
       </header>
 
-      <main ref={scrollRef} className="relative z-10 flex-1 overflow-y-auto p-4 md:px-12 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-4 pb-20">
+      <main ref={scrollRef} className="relative z-10 flex-1 overflow-y-auto p-4 md:px-12 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-4 pb-24">
         
         {/* Date Divider */}
         <div className="flex justify-center my-3 animate-in fade-in duration-700">
@@ -167,12 +169,11 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Initial Bot Messages */}
-        <div className="w-full space-y-1">
+        {/* Bot Messages Section */}
+        <div className="w-full">
           {visibleMessages >= 1 && (
             <BotMessage 
-              isFirst={true}
-              showAvatar={false}
+              showAvatar={true}
               time={currentTime}
               content={
                 <>🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥</>
@@ -182,7 +183,6 @@ export default function Home() {
 
           {visibleMessages >= 2 && (
             <BotMessage 
-              isFirst={false}
               showAvatar={true}
               time={currentTime}
               content={<>Para resgatar seu cupom, basta selecionar abaixo qual é o seu dispositivo:</>}
@@ -190,9 +190,9 @@ export default function Home() {
           )}
         </div>
 
-        {/* User Choice Message */}
+        {/* User Choice Section */}
         {userChoice && (
-          <div className="flex justify-end w-full mt-3 mb-1 animate-in fade-in slide-in-from-right-6 duration-300">
+          <div className="flex justify-end w-full mt-2 mb-3 animate-in fade-in slide-in-from-right-6 duration-300">
             <div className="relative bg-[#d9fdd3] text-[#111b21] py-2 px-3.5 rounded-[12px] rounded-tr-none shadow-sm min-w-[100px] max-w-[85%]">
               <MessageTail color="#d9fdd3" side="right" />
               <p className="text-[14.5px] font-normal leading-relaxed pr-2">
@@ -209,12 +209,11 @@ export default function Home() {
           </div>
         )}
 
-        {/* Post-Choice Bot Messages */}
-        <div className="w-full mt-2 space-y-1">
+        {/* Post-Choice Bot Section */}
+        <div className="w-full mt-2">
           {afterChoiceVisible >= 1 && (
             <BotMessage 
-              isFirst={true}
-              showAvatar={false}
+              showAvatar={true}
               time={currentTime}
               content={
                 <>✅ <strong>Seu CUPOM foi resgatado com sucesso!</strong></>
@@ -224,7 +223,6 @@ export default function Home() {
 
           {afterChoiceVisible >= 2 && (
             <BotMessage 
-              isFirst={false}
               showAvatar={true}
               time={currentTime}
               content={<>Agora, vou te enviar um vídeo demonstrativo. Assiste com atenção para ver o PAINEL na prática! 👇</>}
@@ -234,24 +232,24 @@ export default function Home() {
           {isTyping && <TypingIndicator />}
         </div>
 
-        {/* Device Selection Buttons */}
+        {/* Device Selection Section */}
         {!userChoice && visibleMessages >= 2 && !isTyping && (
-          <div className="flex flex-wrap gap-2 justify-center py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <div className="flex flex-wrap gap-2.5 justify-center py-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <Button 
               onClick={() => handleChoice("Celular ANDROID")}
-              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-7 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-3.5 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
             >
               Celular ANDROID
             </Button>
             <Button 
               onClick={() => handleChoice("Celular IOS")}
-              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-7 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-3.5 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
             >
               Celular IOS
             </Button>
             <Button 
               onClick={() => handleChoice("Emulador")}
-              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-7 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-3.5 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
             >
               Emulador
             </Button>
