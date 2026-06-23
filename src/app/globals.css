@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -37,18 +38,14 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body antialiased selection:bg-accent/30 selection:text-accent;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-headline;
+    @apply bg-[#0b141a] text-foreground font-body antialiased selection:bg-accent/30 selection:text-accent;
   }
 }
 
 .whatsapp-bg {
-  background-image: url("https://i.postimg.cc/c1K3rvFc/e8d94e1e8b6b530ad315e9385290141b.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: linear-gradient(rgba(11, 20, 26, 0.92), rgba(11, 20, 26, 0.92)), url("https://i.postimg.cc/c1K3rvFc/e8d94e1e8b6b530ad315e9385290141b.jpg");
+  background-size: 500px;
+  background-repeat: repeat;
   background-attachment: fixed;
 }
 
@@ -57,23 +54,6 @@
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-.glow-hover {
-  @apply transition-all duration-300;
-}
-.glow-hover:hover {
-  box-shadow: 0 0 20px -5px hsl(var(--primary));
-  @apply border-primary/50;
-}
-
-.stagger-in {
-  animation: staggerIn 0.5s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-@keyframes staggerIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
