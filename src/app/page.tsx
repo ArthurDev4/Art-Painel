@@ -132,6 +132,10 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setAfterChoiceVisible(4);
+
+    // Botão final
+    await new Promise(r => setTimeout(r, 1500));
+    setAfterChoiceVisible(5);
   };
 
   return (
@@ -277,6 +281,16 @@ export default function Home() {
             />
           )}
           
+          {afterChoiceVisible >= 5 && (
+            <div className="flex justify-center py-6 animate-in fade-in zoom-in duration-500">
+               <Button 
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-10 py-4 h-auto font-bold text-[16px] shadow-xl transition-all hover:scale-105 active:scale-95 border-none"
+              >
+                Partir pros VALORES
+              </Button>
+            </div>
+          )}
+
           {isTyping && <TypingIndicator />}
         </div>
 
