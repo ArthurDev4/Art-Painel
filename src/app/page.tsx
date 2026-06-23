@@ -321,6 +321,12 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
       setFeedbackResponseVisible(1);
+
+      await new Promise(r => setTimeout(r, 2000));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 1500));
+      setIsTyping(false);
+      setFeedbackResponseVisible(2);
     }
     // "Partir para o Pagamento" path can be added here later
   };
@@ -539,6 +545,17 @@ export default function Home() {
             />
           )}
 
+          {feedbackResponseVisible >= 2 && (
+            <BotMessage 
+              showAvatar={false}
+              isFirst={false}
+              time={currentTime}
+              content={
+                <>Se LIGA nos <strong>FEEDBACKS</strong> de quem já comprou o PAINEL 👇</>
+              }
+            />
+          )}
+
           {isTyping && <TypingIndicator />}
         </div>
 
@@ -589,4 +606,3 @@ export default function Home() {
     </div>
   );
 }
-
