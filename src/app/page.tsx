@@ -123,16 +123,6 @@ export default function Home() {
 
   return (
     <div className="relative flex flex-col h-screen overflow-hidden font-body bg-[#0b141a]">
-      {/* Imagem de Fundo (Background Wallpaper) */}
-      <div 
-        className="fixed inset-0 z-0 pointer-events-none opacity-[0.06]" 
-        style={{ 
-          backgroundImage: "url('https://i.postimg.cc/66L9W7qC/image3231-1.png')",
-          backgroundRepeat: 'repeat',
-          backgroundSize: '400px'
-        }}
-      />
-
       {/* WhatsApp Header */}
       <header className="relative z-20 bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
         <div className="flex items-center gap-3">
