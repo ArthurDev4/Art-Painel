@@ -455,7 +455,7 @@ export default function Home() {
               isFirst={false}
               time={currentTime}
               content={
-                <AudioPlayer src="https://s3.gangx.site/typebot/public/workspaces/cm8ei2dg50000nyic8a0jkix8/typebots/s6sh4smbmkd061oggj42c0su/blocks/omu7fficv1a9i6fmpb4zpnu0?v=1746398823474" />
+                <AudioPlayer src="https://www.image2url.com/r2/default/audio/1782253041450-84297c4c-6212-4482-9b0a-c7ad7b781515.mp3" />
               }
             />
           )}
