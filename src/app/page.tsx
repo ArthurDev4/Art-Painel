@@ -299,6 +299,12 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2500));
     setIsTyping(false);
     setFinalResponseVisible(3);
+
+    await new Promise(r => setTimeout(r, 3000));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 2000));
+    setIsTyping(false);
+    setFinalResponseVisible(4);
   };
 
   return (
@@ -406,7 +412,6 @@ export default function Home() {
                     src="https://fast.wistia.net/embed/iframe/k4y140j6p6?videoFoam=true" 
                     title="Vídeo Demonstrativo Elite Xiters"
                     allow="autoplay; fullscreen" 
-                    allowtransparency="true"
                     frameBorder="0" 
                     scrolling="no" 
                     className="w-full h-full"
@@ -467,7 +472,7 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[200px] overflow-hidden rounded-[8px]">
+                <div className="w-[110px] sm:w-[137.5px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
@@ -476,6 +481,17 @@ export default function Home() {
                     className="w-full h-auto object-contain block"
                   />
                 </div>
+              }
+            />
+          )}
+
+          {finalResponseVisible >= 4 && (
+            <BotMessage 
+              showAvatar={false}
+              isFirst={false}
+              time={currentTime}
+              content={
+                <AudioPlayer src="https://s3.gangx.site/typebot/public/workspaces/cm8ei2dg50000nyic8a0jkix8/typebots/s6sh4smbmkd061oggj42c0su/blocks/zz2pjkjbc29ov5v02dls3jg4?v=1746398877941" />
               }
             />
           )}
