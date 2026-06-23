@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 
 const TypingIndicator = () => (
   <div className="flex items-end gap-2 animate-in fade-in duration-300 mb-2">
-    {/* Avatar circular alinhado à base */}
     <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-sm border border-black/5">
       <Image 
         src="https://picsum.photos/seed/elite-logo/100/100" 
@@ -19,7 +18,6 @@ const TypingIndicator = () => (
         data-ai-hint="gaming logo"
       />
     </div>
-    {/* Balão de digitação refinado e mais compacto */}
     <div className="relative bg-white py-3 px-5 rounded-[20px] rounded-bl-none shadow-sm flex items-center justify-center min-h-[42px]">
       <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
       <div className="flex gap-1.5">
@@ -42,10 +40,8 @@ export default function Home() {
     setCurrentTime(now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }));
 
     const sequence = async () => {
-      // Pequeno delay inicial
       await new Promise(r => setTimeout(r, 800));
       
-      // Digitando para a primeira mensagem
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
@@ -53,7 +49,6 @@ export default function Home() {
 
       await new Promise(r => setTimeout(r, 1200));
 
-      // Digitando para a segunda mensagem
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
@@ -69,28 +64,31 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen whatsapp-bg overflow-hidden font-body selection:bg-[#00a884]/30">
-      {/* Chat Area - Scroll suave e limpo */}
       <main className="flex-1 overflow-y-auto p-4 md:px-12 space-y-4 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-10 pb-10">
         
-        {/* Data Centrada */}
         <div className="flex justify-center my-6 animate-in fade-in duration-700">
           <span className="bg-[#182229]/70 backdrop-blur-sm text-[#8696a0] text-[11px] px-3 py-1.5 rounded-lg shadow-sm font-medium uppercase tracking-wider">
             Hoje
           </span>
         </div>
 
-        {/* Bot Message Group */}
-        <div className="space-y-1.5 w-full max-w-[95%] md:max-w-[75%]">
-          {/* Efeito de Digitação 1 */}
+        <div className="space-y-4 w-full max-w-[95%] md:max-w-[75%]">
           {isTyping && visibleMessages === 0 && <TypingIndicator />}
 
-          {/* Mensagem 1 */}
+          {/* Mensagem 1 - Agora idêntica à 2 */}
           {visibleMessages >= 1 && (
-            <div className="flex items-start gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
-              {/* Espaçador para manter o alinhamento sem o avatar na primeira msg do grupo */}
-              <div className="w-9 h-9 shrink-0"></div>
-              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-tl-none shadow-sm flex-1 max-w-fit">
-                <div className="absolute top-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-top"></div>
+            <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
+              <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-md">
+                <Image 
+                  src="https://picsum.photos/seed/elite-logo/100/100" 
+                  alt="Avatar" 
+                  width={36} 
+                  height={36} 
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex-1 max-w-fit">
+                <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
                 <p className="text-[14.5px] leading-relaxed">
                   🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥
                 </p>
@@ -99,10 +97,9 @@ export default function Home() {
             </div>
           )}
 
-          {/* Efeito de Digitação 2 */}
           {isTyping && visibleMessages === 1 && <TypingIndicator />}
 
-          {/* Mensagem 2 + Avatar */}
+          {/* Mensagem 2 */}
           {visibleMessages >= 2 && (
             <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
               <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-md">
@@ -125,7 +122,6 @@ export default function Home() {
           )}
         </div>
 
-        {/* User Response Message */}
         {userChoice && (
           <div className="flex justify-end w-full mt-4 animate-in fade-in slide-in-from-right-6 duration-300 fill-mode-both">
             <div className="relative bg-[#d9fdd3] text-[#111b21] py-2.5 px-4 rounded-[16px] rounded-tr-none shadow-sm min-w-[120px] max-w-[85%]">
@@ -144,7 +140,6 @@ export default function Home() {
           </div>
         )}
 
-        {/* Quick Reply Buttons */}
         {!userChoice && visibleMessages >= 2 && !isTyping && (
           <div className="flex flex-wrap gap-2 justify-center py-10 animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-both">
             <Button 
@@ -170,9 +165,6 @@ export default function Home() {
       </main>
 
       <style jsx>{`
-        .clip-path-tail-left-top {
-          clip-path: polygon(100% 0, 100% 100%, 0 0);
-        }
         .clip-path-tail-left-bottom {
           clip-path: polygon(100% 0, 100% 100%, 0 100%);
         }
