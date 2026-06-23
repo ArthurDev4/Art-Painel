@@ -156,7 +156,7 @@ const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: {
         </div>
       )}
     </div>
-    <div className={`relative bg-white text-[#111b21] rounded-[12px] shadow-sm max-w-[85%] w-fit ${isFirst ? 'rounded-tl-none' : ''} ${noPadding ? 'p-0 overflow-hidden' : 'p-2.5 px-3.5'}`}>
+    <div className={`relative bg-white text-[#111b21] rounded-[12px] shadow-sm max-w-[85%] w-fit ${isFirst ? 'rounded-tl-none' : ''} ${noPadding ? 'p-0.5 overflow-hidden' : 'p-2.5 px-3.5'}`}>
       {isFirst && <MessageTail color="white" side="left" />}
       <div className={`text-[14.5px] leading-relaxed font-normal`}>
         {content}
@@ -333,6 +333,12 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
       setFeedbackResponseVisible(3);
+
+      await new Promise(r => setTimeout(r, 5000));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 1500));
+      setIsTyping(false);
+      setFeedbackResponseVisible(4);
     }
   };
 
@@ -577,6 +583,26 @@ export default function Home() {
                     scrolling="no" 
                     className="w-full h-full"
                   ></iframe>
+                </div>
+              }
+            />
+          )}
+
+          {feedbackResponseVisible >= 4 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={false}
+              time={currentTime}
+              noPadding={true}
+              content={
+                <div className="w-[240px] overflow-hidden rounded-[8px]">
+                  <Image 
+                    src="https://i.postimg.cc/43mRk5FJ/cd6a1shc.png" 
+                    alt="Chamada para Ação" 
+                    width={240} 
+                    height={100} 
+                    className="w-full h-auto object-contain block"
+                  />
                 </div>
               }
             />
