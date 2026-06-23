@@ -212,6 +212,7 @@ export default function Home() {
   const [userChoice, setUserChoice] = useState<string | null>(null);
   const [finalChoice, setFinalChoice] = useState<string | null>(null);
   const [finalAction, setFinalAction] = useState<string | null>(null);
+  const [feedbackAction, setFeedbackAction] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState("");
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [afterChoiceVisible, setAfterChoiceVisible] = useState<number>(0);
@@ -245,7 +246,7 @@ export default function Home() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, isTyping, userChoice, finalChoice, finalAction]);
+  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, isTyping, userChoice, finalChoice, finalAction, feedbackAction]);
 
   const handleChoice = async (choice: string) => {
     setUserChoice(choice);
@@ -358,6 +359,10 @@ export default function Home() {
       setIsTyping(false);
       setFeedbackResponseVisible(7);
     }
+  };
+
+  const handleFeedbackAction = (action: string) => {
+    setFeedbackAction(action);
   };
 
   return (
@@ -678,6 +683,10 @@ export default function Home() {
             />
           )}
 
+          {feedbackAction && (
+            <UserMessage content={feedbackAction} time={currentTime} />
+          )}
+
           {isTyping && <TypingIndicator />}
         </div>
 
@@ -720,6 +729,19 @@ export default function Home() {
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
                 Ver Feedbacks de Clientes
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {feedbackResponseVisible >= 7 && !feedbackAction && !isTyping && (
+          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-wrap gap-2.5 justify-end max-w-[500px]">
+              <Button 
+                onClick={() => handleFeedbackAction("Sim, voltar para os valores")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-3.5 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              >
+                Sim, voltar para os valores
               </Button>
             </div>
           </div>
