@@ -21,7 +21,7 @@ const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?
   </svg>
 );
 
-const BotMessage = ({ content, time, showAvatar, isFirst }: { content: React.ReactNode, time: string, showAvatar: boolean, isFirst?: boolean }) => (
+const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: { content: React.ReactNode, time: string, showAvatar: boolean, isFirst?: boolean, noPadding?: boolean }) => (
   <div className="flex items-start gap-2 mb-3 animate-in fade-in slide-in-from-left-4 duration-500">
     <div className="w-8 h-8 shrink-0 flex items-center justify-center mt-auto mb-1">
       {showAvatar && (
@@ -36,12 +36,12 @@ const BotMessage = ({ content, time, showAvatar, isFirst }: { content: React.Rea
         </div>
       )}
     </div>
-    <div className={`relative bg-white text-[#111b21] p-2.5 px-3.5 rounded-[12px] shadow-sm flex-1 max-w-[85%] ${isFirst ? 'rounded-tl-none' : ''}`}>
+    <div className={`relative bg-white text-[#111b21] rounded-[12px] shadow-sm flex-1 max-w-[85%] ${isFirst ? 'rounded-tl-none' : ''} ${noPadding ? 'p-1' : 'p-2.5 px-3.5'}`}>
       {isFirst && <MessageTail color="white" side="left" />}
-      <div className="text-[14.5px] leading-relaxed font-normal">
+      <div className="text-[14.5px] leading-relaxed font-normal overflow-hidden rounded-[8px]">
         {content}
       </div>
-      <div className="text-[10px] text-[#667781] text-right mt-1 font-normal">{time}</div>
+      <div className={`text-[10px] text-[#667781] text-right mt-1 font-normal ${noPadding ? 'px-2 pb-1' : ''}`}>{time}</div>
     </div>
   </div>
 );
@@ -119,6 +119,12 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2200));
     setIsTyping(false);
     setAfterChoiceVisible(2);
+
+    await new Promise(r => setTimeout(r, 1500));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 2500));
+    setIsTyping(false);
+    setAfterChoiceVisible(3);
   };
 
   return (
@@ -226,10 +232,32 @@ export default function Home() {
 
           {afterChoiceVisible >= 2 && (
             <BotMessage 
-              showAvatar={true}
+              showAvatar={false}
               isFirst={false}
               time={currentTime}
               content={<>Agora, vou te enviar um vídeo demonstrativo. Assiste com atenção para ver o PAINEL na prática! 👇</>}
+            />
+          )}
+
+          {afterChoiceVisible >= 3 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={false}
+              time={currentTime}
+              noPadding={true}
+              content={
+                <div className="aspect-video w-full">
+                   <iframe 
+                    src="https://fast.wistia.net/embed/iframe/6clh6thgxz?videoFoam=true" 
+                    title="Vídeo Demonstrativo Elite Xiters"
+                    allow="autoplay; fullscreen" 
+                    allowTransparency={true}
+                    frameBorder="0" 
+                    scrolling="no" 
+                    className="w-full h-full rounded-[8px]"
+                  ></iframe>
+                </div>
+              }
             />
           )}
           
