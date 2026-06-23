@@ -160,10 +160,10 @@ const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: {
     </div>
     <div className={`relative bg-white text-[#111b21] rounded-[12px] shadow-sm flex-1 max-w-[85%] ${isFirst ? 'rounded-tl-none' : ''} ${noPadding ? 'p-0 overflow-hidden' : 'p-2.5 px-3.5'}`}>
       {isFirst && <MessageTail color="white" side="left" />}
-      <div className={`text-[14.5px] leading-relaxed font-normal ${noPadding ? '' : 'overflow-hidden rounded-[8px]'}`}>
+      <div className={`text-[14.5px] leading-relaxed font-normal`}>
         {content}
       </div>
-      <div className={`text-[10px] text-[#667781] text-right font-normal ${noPadding ? 'absolute bottom-1 right-2 bg-white/70 px-1 rounded backdrop-blur-sm' : 'mt-1'}`}>{time}</div>
+      <div className={`text-[10px] text-[#667781] text-right font-normal ${noPadding ? 'absolute bottom-1.5 right-1.5 bg-black/30 text-white px-1.5 py-0.5 rounded backdrop-blur-sm' : 'mt-1'}`}>{time}</div>
     </div>
   </div>
 );
@@ -401,7 +401,7 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="aspect-[4/3] w-full bg-black overflow-hidden">
+                <div className="aspect-[4/3] w-full bg-black overflow-hidden rounded-[8px]">
                    <iframe 
                     src="https://fast.wistia.net/embed/iframe/k4y140j6p6?videoFoam=true" 
                     title="Vídeo Demonstrativo Elite Xiters"
@@ -466,7 +466,7 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-full max-w-[280px]">
+                <div className="w-full overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
