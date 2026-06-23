@@ -326,8 +326,8 @@ export default function Home() {
 
         {/* Device Selection Section */}
         {!userChoice && visibleMessages >= 2 && !isTyping && (
-          <div className="w-full flex justify-center py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex flex-wrap gap-2.5 justify-center max-w-[500px]">
+          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-wrap gap-2.5 justify-end max-w-[500px]">
               <Button 
                 onClick={() => handleChoice("Celular ANDROID")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
