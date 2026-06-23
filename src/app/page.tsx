@@ -158,7 +158,7 @@ const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: {
         </div>
       )}
     </div>
-    <div className={`relative bg-white text-[#111b21] rounded-[12px] shadow-sm flex-1 max-w-[85%] ${isFirst ? 'rounded-tl-none' : ''} ${noPadding ? 'p-0 overflow-hidden' : 'p-2.5 px-3.5'}`}>
+    <div className={`relative bg-white text-[#111b21] rounded-[12px] shadow-sm max-w-[85%] w-fit ${isFirst ? 'rounded-tl-none' : ''} ${noPadding ? 'p-0 overflow-hidden' : 'p-2.5 px-3.5'}`}>
       {isFirst && <MessageTail color="white" side="left" />}
       <div className={`text-[14.5px] leading-relaxed font-normal`}>
         {content}
@@ -401,11 +401,12 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="aspect-[4/3] w-full bg-black overflow-hidden rounded-[8px]">
+                <div className="aspect-[4/3] w-[280px] sm:w-[320px] bg-black rounded-[8px] overflow-hidden">
                    <iframe 
                     src="https://fast.wistia.net/embed/iframe/k4y140j6p6?videoFoam=true" 
                     title="Vídeo Demonstrativo Elite Xiters"
                     allow="autoplay; fullscreen" 
+                    allowtransparency="true"
                     frameBorder="0" 
                     scrolling="no" 
                     className="w-full h-full"
@@ -466,12 +467,12 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[55%] overflow-hidden rounded-[8px]">
+                <div className="w-[200px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
-                    width={800} 
-                    height={1000} 
+                    width={200} 
+                    height={250} 
                     className="w-full h-auto object-contain block"
                   />
                 </div>
