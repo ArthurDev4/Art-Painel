@@ -32,7 +32,7 @@ const TypingIndicator = () => (
         className="object-cover"
       />
     </div>
-    <div className="relative bg-white py-3 px-4 rounded-[12px] shadow-sm flex items-center justify-center min-w-[50px] min-h-[35px]">
+    <div className="relative bg-white py-2.5 px-4 rounded-[12px] shadow-sm flex items-center justify-center min-w-[55px]">
       <div className="flex gap-1">
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
@@ -46,6 +46,7 @@ export default function Home() {
   const [userChoice, setUserChoice] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState("");
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
+  const [afterChoiceVisible, setAfterChoiceVisible] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
 
   useEffect(() => {
@@ -69,13 +70,26 @@ export default function Home() {
     sequence();
   }, []);
 
-  const handleChoice = (choice: string) => {
+  const handleChoice = async (choice: string) => {
     setUserChoice(choice);
+    
+    // Inicia sequência de resposta do bot após a escolha
+    await new Promise(r => setTimeout(r, 1500));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 2000));
+    setIsTyping(false);
+    setAfterChoiceVisible(1);
+
+    await new Promise(r => setTimeout(r, 1500));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 2500));
+    setIsTyping(false);
+    setAfterChoiceVisible(2);
   };
 
   return (
     <div className="flex flex-col h-screen whatsapp-bg overflow-hidden font-body selection:bg-[#00a884]/30 bg-[#0b141a]">
-      {/* WhatsApp Header - Based on Image */}
+      {/* WhatsApp Header */}
       <header className="bg-[#202c33] text-white px-4 py-2.5 flex items-center justify-between shadow-md z-10">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10">
@@ -100,7 +114,7 @@ export default function Home() {
         </Button>
       </header>
 
-      <main className="flex-1 overflow-y-auto p-4 md:px-12 space-y-4 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-6 pb-20">
+      <main className="flex-1 overflow-y-auto p-4 md:px-12 space-y-4 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-6 pb-24">
         
         <div className="flex justify-center my-2 animate-in fade-in duration-700">
           <span className="bg-[#182229]/80 backdrop-blur-sm text-[#8696a0] text-[11px] px-3 py-1.5 rounded-lg shadow-sm font-medium uppercase tracking-wider">
@@ -108,21 +122,11 @@ export default function Home() {
           </span>
         </div>
 
-        {/* Business Info Message - Based on Image */}
-        <div className="flex justify-center mb-6 animate-in fade-in slide-in-from-top-4 duration-700">
-          <div className="bg-[#d1f4ff] text-[#111b21] p-3 px-6 rounded-2xl flex items-center gap-3 shadow-sm max-w-[90%] md:max-w-[70%] border border-[#b3e5f2]/30">
-            <div className="w-5 h-5 bg-[#8696a0] rounded-full flex items-center justify-center text-white text-[12px] font-bold shrink-0">i</div>
-            <p className="text-[13px] leading-tight font-medium opacity-90">
-              Essa empresa usa uma Conta Comercial verificada pela Meta.
-            </p>
-          </div>
-        </div>
-
+        {/* Mensagens Iniciais */}
         <div className="space-y-1.5 w-full">
-          {/* Mensagem 1 */}
           {visibleMessages >= 1 && (
             <div className="flex items-start gap-2 animate-in fade-in slide-in-from-left-6 duration-500 mb-0.5">
-              <div className="w-8 h-8 opacity-0"></div> {/* Spacer for alignment */}
+              <div className="w-8 h-8 opacity-0"></div>
               <div className="relative bg-white text-[#111b21] p-2.5 px-4 rounded-[12px] rounded-tl-none shadow-sm flex-1 max-w-fit">
                 <MessageTail color="white" side="left" position="top" />
                 <div className="text-[14.5px] leading-relaxed">
@@ -133,7 +137,6 @@ export default function Home() {
             </div>
           )}
 
-          {/* Mensagem 2 com Avatar */}
           {visibleMessages >= 2 && (
             <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500">
               <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-sm border border-white/10">
@@ -153,10 +156,9 @@ export default function Home() {
               </div>
             </div>
           )}
-
-          {isTyping && <TypingIndicator />}
         </div>
 
+        {/* Escolha do Usuário */}
         {userChoice && (
           <div className="flex justify-end w-full mt-4 animate-in fade-in slide-in-from-right-6 duration-300">
             <div className="relative bg-[#d9fdd3] text-[#111b21] py-2.5 px-4 rounded-[12px] rounded-tr-none shadow-sm min-w-[120px] max-w-[85%]">
@@ -175,23 +177,62 @@ export default function Home() {
           </div>
         )}
 
+        {/* Respostas do Bot Após Escolha */}
+        <div className="space-y-1.5 w-full">
+          {afterChoiceVisible >= 1 && (
+            <div className="flex items-start gap-2 animate-in fade-in slide-in-from-left-6 duration-500 mb-0.5">
+              <div className="w-8 h-8 opacity-0"></div>
+              <div className="relative bg-white text-[#111b21] p-2.5 px-4 rounded-[12px] rounded-tl-none shadow-sm flex-1 max-w-fit">
+                <MessageTail color="white" side="left" position="top" />
+                <div className="text-[14.5px] leading-relaxed">
+                  ✅ <strong>Seu CUPOM foi resgatado com sucesso!</strong>
+                </div>
+                <div className="text-[11px] text-[#667781] text-right mt-1 font-normal">{currentTime}</div>
+              </div>
+            </div>
+          )}
+
+          {afterChoiceVisible >= 2 && (
+            <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500">
+              <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-sm border border-white/10">
+                <Image 
+                  src="https://picsum.photos/seed/elite-logo/100/100" 
+                  alt="Avatar" 
+                  width={32} 
+                  height={32} 
+                  className="object-cover"
+                />
+              </div>
+              <div className="relative bg-white text-[#111b21] p-2.5 px-4 rounded-[12px] shadow-sm flex-1 max-w-fit">
+                <div className="text-[14.5px] leading-relaxed">
+                  Agora, vou te enviar um vídeo demonstrativo. Assiste com atenção para ver o PAINEL na prática! 👇
+                </div>
+                <div className="text-[11px] text-[#667781] text-right mt-1 font-normal">{currentTime}</div>
+              </div>
+            </div>
+          )}
+          
+          {isTyping && <TypingIndicator />}
+        </div>
+
+        {/* Botões de Opção */}
         {!userChoice && visibleMessages >= 2 && !isTyping && (
           <div className="flex flex-wrap gap-2 justify-center py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <Button 
               onClick={() => handleChoice("Celular ANDROID")}
-              className="bg-[#005c4b] hover:bg-[#004d3f] text-white rounded-full px-6 py-2 h-auto font-medium text-[14px] shadow-md transition-transform active:scale-95 border-none"
+              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-2.5 h-auto font-medium text-[14px] shadow-md transition-transform active:scale-95 border-none"
             >
               Celular ANDROID
             </Button>
             <Button 
               onClick={() => handleChoice("Celular IOS")}
-              className="bg-[#005c4b] hover:bg-[#004d3f] text-white rounded-full px-6 py-2 h-auto font-medium text-[14px] shadow-md transition-transform active:scale-95 border-none"
+              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-2.5 h-auto font-medium text-[14px] shadow-md transition-transform active:scale-95 border-none"
             >
               Celular IOS
             </Button>
             <Button 
               onClick={() => handleChoice("Emulador")}
-              className="bg-[#005c4b] hover:bg-[#004d3f] text-white rounded-full px-6 py-2 h-auto font-medium text-[14px] shadow-md transition-transform active:scale-95 border-none"
+              className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-2.5 h-auto font-medium text-[14px] shadow-md transition-transform active:scale-95 border-none"
             >
               Emulador
             </Button>
