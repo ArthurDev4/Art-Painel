@@ -351,6 +351,12 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setFeedbackResponseVisible(6);
+
+      await new Promise(r => setTimeout(r, 3000));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 2000));
+      setIsTyping(false);
+      setFeedbackResponseVisible(7);
     }
   };
 
@@ -657,6 +663,17 @@ export default function Home() {
                     className="w-full h-auto object-contain block"
                   />
                 </div>
+              }
+            />
+          )}
+
+          {feedbackResponseVisible >= 7 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={false}
+              time={currentTime}
+              content={
+                <>Depois desses feedbacks, dá pra ver que o painel realmente é INSANO. <strong>Quer voltar pros valores e garantir o seu também?</strong> 🔥 Ou ainda tem dúvidas?</>
               }
             />
           )}
