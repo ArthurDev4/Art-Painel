@@ -305,6 +305,12 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setFinalResponseVisible(4);
+
+    await new Promise(r => setTimeout(r, 3000));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 1500));
+    setIsTyping(false);
+    setFinalResponseVisible(5);
   };
 
   return (
@@ -493,6 +499,15 @@ export default function Home() {
               content={
                 <AudioPlayer src="https://s3.gangx.site/typebot/public/workspaces/cm8ei2dg50000nyic8a0jkix8/typebots/s6sh4smbmkd061oggj42c0su/blocks/zz2pjkjbc29ov5v02dls3jg4?v=1746398877941" />
               }
+            />
+          )}
+
+          {finalResponseVisible >= 5 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={false}
+              time={currentTime}
+              content={<>Seleciona uma opção abaixo para continuar: 👇</>}
             />
           )}
 
