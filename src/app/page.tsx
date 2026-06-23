@@ -246,15 +246,15 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="aspect-video w-full">
+                <div className="aspect-[4/3] w-full bg-black rounded-[8px] overflow-hidden">
                    <iframe 
-                    src="https://fast.wistia.net/embed/iframe/6clh6thgxz?videoFoam=true" 
+                    src="https://fast.wistia.net/embed/iframe/k4y140j6p6?videoFoam=true" 
                     title="Vídeo Demonstrativo Elite Xiters"
                     allow="autoplay; fullscreen" 
                     allowTransparency={true}
                     frameBorder="0" 
                     scrolling="no" 
-                    className="w-full h-full rounded-[8px]"
+                    className="w-full h-full"
                   ></iframe>
                 </div>
               }
