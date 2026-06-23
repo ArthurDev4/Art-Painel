@@ -6,25 +6,60 @@ import Image from 'next/image';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+// Componente para a cauda do balão (estilo WhatsApp)
+const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?: "left" | "right" }) => (
+  <svg 
+    className={`absolute ${side === 'left' ? 'bottom-0 -left-[7px]' : 'top-0 -right-[7px]'} w-2.5 h-3.5`} 
+    viewBox="0 0 10 14" 
+    style={{ fill: color }}
+  >
+    {side === 'left' ? (
+      <path d="M10 0 L10 14 L0 14 Z" />
+    ) : (
+      <path d="M0 0 L0 14 L10 0 Z" />
+    )}
+  </svg>
+);
+
 const TypingIndicator = () => (
-  <div className="flex items-end gap-2 animate-in fade-in duration-300 mb-2">
-    <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-sm border border-black/5">
+  <div className="flex items-end gap-2 mb-2 animate-in fade-in duration-300">
+    <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-sm border border-black/5">
       <Image 
         src="https://picsum.photos/seed/elite-logo/100/100" 
         alt="Avatar" 
-        width={36} 
-        height={36} 
+        width={32} 
+        height={32} 
         className="object-cover"
-        data-ai-hint="gaming logo"
       />
     </div>
-    <div className="relative bg-white py-3 px-5 rounded-[20px] rounded-bl-none shadow-sm flex items-center justify-center min-h-[42px]">
-      <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
-      <div className="flex gap-1.5">
+    <div className="relative bg-white py-3 px-4 rounded-[18px] rounded-bl-none shadow-sm flex items-center justify-center min-w-[55px] min-h-[40px]">
+      <MessageTail color="white" side="left" />
+      <div className="flex gap-1">
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce"></div>
       </div>
+    </div>
+  </div>
+);
+
+const BotMessage = ({ content, time }: { content: React.ReactNode, time: string }) => (
+  <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
+    <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-sm">
+      <Image 
+        src="https://picsum.photos/seed/elite-logo/100/100" 
+        alt="Avatar" 
+        width={32} 
+        height={32} 
+        className="object-cover"
+      />
+    </div>
+    <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[18px] rounded-bl-none shadow-sm flex-1 max-w-fit">
+      <MessageTail color="white" side="left" />
+      <div className="text-[14.5px] leading-relaxed pr-2">
+        {content}
+      </div>
+      <div className="text-[11px] text-[#667781] text-right mt-1 font-normal">{time}</div>
     </div>
   </div>
 );
@@ -43,14 +78,14 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 800));
       
       setIsTyping(true);
-      await new Promise(r => setTimeout(r, 2000));
+      await new Promise(r => setTimeout(r, 1800));
       setIsTyping(false);
       setVisibleMessages(1);
 
-      await new Promise(r => setTimeout(r, 1200));
+      await new Promise(r => setTimeout(r, 1000));
 
       setIsTyping(true);
-      await new Promise(r => setTimeout(r, 2500));
+      await new Promise(r => setTimeout(r, 2200));
       setIsTyping(false);
       setVisibleMessages(2);
     };
@@ -75,57 +110,31 @@ export default function Home() {
         <div className="space-y-4 w-full max-w-[95%] md:max-w-[75%]">
           {isTyping && visibleMessages === 0 && <TypingIndicator />}
 
-          {/* Mensagem 1 - Agora idêntica à 2 */}
+          {/* Mensagem 1 */}
           {visibleMessages >= 1 && (
-            <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
-              <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-md">
-                <Image 
-                  src="https://picsum.photos/seed/elite-logo/100/100" 
-                  alt="Avatar" 
-                  width={36} 
-                  height={36} 
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex-1 max-w-fit">
-                <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
-                <p className="text-[14.5px] leading-relaxed">
-                  🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥
-                </p>
-                <div className="text-[11px] text-[#667781] text-right mt-1 font-normal">{currentTime}</div>
-              </div>
-            </div>
+            <BotMessage 
+              time={currentTime}
+              content={
+                <>🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥</>
+              }
+            />
           )}
 
           {isTyping && visibleMessages === 1 && <TypingIndicator />}
 
           {/* Mensagem 2 */}
           {visibleMessages >= 2 && (
-            <div className="flex items-end gap-2 animate-in fade-in slide-in-from-left-6 duration-500 fill-mode-both">
-              <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center overflow-hidden shrink-0 shadow-md">
-                <Image 
-                  src="https://picsum.photos/seed/elite-logo/100/100" 
-                  alt="Avatar" 
-                  width={36} 
-                  height={36} 
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative bg-white text-[#111b21] p-3 px-4 rounded-[16px] rounded-bl-none shadow-sm flex-1 max-w-fit">
-                <div className="absolute bottom-0 -left-2 w-3 h-3 bg-white clip-path-tail-left-bottom"></div>
-                <p className="text-[14.5px] leading-relaxed">
-                  Para resgatar seu cupom, basta selecionar abaixo qual é o seu dispositivo:
-                </p>
-                <div className="text-[11px] text-[#667781] text-right mt-1 font-normal">{currentTime}</div>
-              </div>
-            </div>
+            <BotMessage 
+              time={currentTime}
+              content="Para resgatar seu cupom, basta selecionar abaixo qual é o seu dispositivo:"
+            />
           )}
         </div>
 
         {userChoice && (
           <div className="flex justify-end w-full mt-4 animate-in fade-in slide-in-from-right-6 duration-300 fill-mode-both">
-            <div className="relative bg-[#d9fdd3] text-[#111b21] py-2.5 px-4 rounded-[16px] rounded-tr-none shadow-sm min-w-[120px] max-w-[85%]">
-              <div className="absolute top-0 -right-2 w-3 h-3 bg-[#d9fdd3] clip-path-tail-right-top"></div>
+            <div className="relative bg-[#d9fdd3] text-[#111b21] py-2.5 px-4 rounded-[18px] rounded-tr-none shadow-sm min-w-[120px] max-w-[85%]">
+              <MessageTail color="#d9fdd3" side="right" />
               <p className="text-[15px] font-normal leading-relaxed pr-2">
                 {userChoice}
               </p>
@@ -165,12 +174,6 @@ export default function Home() {
       </main>
 
       <style jsx>{`
-        .clip-path-tail-left-bottom {
-          clip-path: polygon(100% 0, 100% 100%, 0 100%);
-        }
-        .clip-path-tail-right-top {
-          clip-path: polygon(0 0, 0 100%, 100% 0);
-        }
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
