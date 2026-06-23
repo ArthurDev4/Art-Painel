@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Check, CheckCircle2, MoreVertical, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-// SVG para a cauda do balão estilo WhatsApp original (preciso, sem artefatos)
+// SVG para a cauda do balão estilo WhatsApp original
 const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?: "left" | "right" }) => (
   <svg 
     className={`absolute top-0 ${side === 'left' ? '-left-[8px]' : '-right-[8px]'} w-2.5 h-3 z-10`} 
@@ -32,7 +32,6 @@ const BotMessage = ({ content, time, showAvatar, isFirst }: { content: React.Rea
             width={32} 
             height={32} 
             className="object-cover"
-            data-ai-hint="company logo"
           />
         </div>
       )}
@@ -57,7 +56,6 @@ const TypingIndicator = () => (
           width={32} 
           height={32} 
           className="object-cover"
-          data-ai-hint="company logo"
         />
       </div>
     </div>
@@ -125,6 +123,16 @@ export default function Home() {
 
   return (
     <div className="relative flex flex-col h-screen overflow-hidden font-body bg-[#0b141a]">
+      {/* Imagem de Fundo (Background Wallpaper) */}
+      <div 
+        className="fixed inset-0 z-0 pointer-events-none opacity-[0.06]" 
+        style={{ 
+          backgroundImage: "url('https://i.postimg.cc/66L9W7qC/image3231-1.png')",
+          backgroundRepeat: 'repeat',
+          backgroundSize: '400px'
+        }}
+      />
+
       {/* WhatsApp Header */}
       <header className="relative z-20 bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
         <div className="flex items-center gap-3">
@@ -135,7 +143,6 @@ export default function Home() {
               width={40} 
               height={40}
               className="object-cover"
-              data-ai-hint="company logo"
             />
           </div>
           <div className="flex flex-col">
