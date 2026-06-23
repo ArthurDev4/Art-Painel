@@ -38,22 +38,24 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#0b141a] text-foreground font-body antialiased selection:bg-accent/30 selection:text-accent;
+    @apply bg-[#0b141a] text-foreground font-body antialiased selection:bg-[#00a884]/30;
   }
 }
 
 .whatsapp-bg {
-  background-image: linear-gradient(rgba(11, 20, 26, 0.92), rgba(11, 20, 26, 0.92)), url("https://i.postimg.cc/c1K3rvFc/e8d94e1e8b6b530ad315e9385290141b.jpg");
-  background-size: 500px;
+  /* Camada de cor escura + Imagem solicitada pelo usuário */
+  background-color: #0b141a;
+  background-image: linear-gradient(rgba(11, 20, 26, 0.9), rgba(11, 20, 26, 0.9)), url("https://i.postimg.cc/66L9W7qC/image3231-1.png");
+  background-size: 450px;
   background-repeat: repeat;
   background-attachment: fixed;
 }
 
-.glass-card {
-  @apply bg-card/40 backdrop-blur-xl border border-white/5;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
