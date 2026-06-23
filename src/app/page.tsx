@@ -213,11 +213,13 @@ export default function Home() {
   const [finalChoice, setFinalChoice] = useState<string | null>(null);
   const [finalAction, setFinalAction] = useState<string | null>(null);
   const [feedbackAction, setFeedbackAction] = useState<string | null>(null);
+  const [finalActionAgain, setFinalActionAgain] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState("");
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [afterChoiceVisible, setAfterChoiceVisible] = useState<number>(0);
   const [finalResponseVisible, setFinalResponseVisible] = useState<number>(0);
   const [feedbackResponseVisible, setFeedbackResponseVisible] = useState<number>(0);
+  const [returnToPricesVisible, setReturnToPricesVisible] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -246,7 +248,7 @@ export default function Home() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, isTyping, userChoice, finalChoice, finalAction, feedbackAction]);
+  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, returnToPricesVisible, isTyping, userChoice, finalChoice, finalAction, feedbackAction, finalActionAgain]);
 
   const handleChoice = async (choice: string) => {
     setUserChoice(choice);
@@ -361,8 +363,29 @@ export default function Home() {
     }
   };
 
-  const handleFeedbackAction = (action: string) => {
+  const handleFeedbackAction = async (action: string) => {
     setFeedbackAction(action);
+    
+    if (action === "Sim, voltar para os valores") {
+      await new Promise(r => setTimeout(r, 1000));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 2500));
+      setIsTyping(false);
+      setReturnToPricesVisible(1);
+
+      await new Promise(r => setTimeout(r, 1500));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 1800));
+      setIsTyping(false);
+      setReturnToPricesVisible(2);
+
+      await new Promise(r => setTimeout(r, 1200));
+      setReturnToPricesVisible(3);
+    }
+  };
+
+  const handleFinalActionAgain = (action: string) => {
+    setFinalActionAgain(action);
   };
 
   return (
@@ -687,6 +710,41 @@ export default function Home() {
             <UserMessage content={feedbackAction} time={currentTime} />
           )}
 
+          {returnToPricesVisible >= 1 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={true}
+              time={currentTime}
+              content={
+                <>Parabéns pela escolha! 👊 <strong>Tenho certeza que você vai amassar usando o PAINEL ELITE!</strong> Segue a tabela de valores novamente! 👇</>
+              }
+            />
+          )}
+
+          {returnToPricesVisible >= 2 && (
+            <BotMessage 
+              showAvatar={false}
+              isFirst={false}
+              time={currentTime}
+              noPadding={true}
+              content={
+                <div className="w-[110px] sm:w-[137.5px] overflow-hidden rounded-[8px]">
+                  <Image 
+                    src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
+                    alt="Tabela de Preços Elite Xiters" 
+                    width={200} 
+                    height={250} 
+                    className="w-full h-auto object-contain block"
+                  />
+                </div>
+              }
+            />
+          )}
+
+          {finalActionAgain && (
+            <UserMessage content={finalActionAgain} time={currentTime} />
+          )}
+
           {isTyping && <TypingIndicator />}
         </div>
 
@@ -742,6 +800,25 @@ export default function Home() {
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-3.5 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
                 Sim, voltar para os valores
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {returnToPricesVisible >= 3 && !finalActionAgain && !isTyping && (
+          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-wrap gap-2.5 justify-end max-w-[500px]">
+              <Button 
+                onClick={() => handleFinalActionAgain("Partir para o Pagamento")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              >
+                Partir para o Pagamento
+              </Button>
+              <Button 
+                onClick={() => handleFinalActionAgain("Ver Feedbacks de Clientes")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              >
+                Ver Feedbacks de Clientes
               </Button>
             </div>
           </div>
