@@ -327,8 +327,13 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 1500));
       setIsTyping(false);
       setFeedbackResponseVisible(2);
+
+      await new Promise(r => setTimeout(r, 3000));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 2500));
+      setIsTyping(false);
+      setFeedbackResponseVisible(3);
     }
-    // "Partir para o Pagamento" path can be added here later
   };
 
   return (
@@ -552,6 +557,27 @@ export default function Home() {
               time={currentTime}
               content={
                 <>Se LIGA nos <strong>FEEDBACKS</strong> de quem já comprou o PAINEL 👇</>
+              }
+            />
+          )}
+
+          {feedbackResponseVisible >= 3 && (
+            <BotMessage 
+              showAvatar={false}
+              isFirst={false}
+              time={currentTime}
+              noPadding={true}
+              content={
+                <div className="aspect-[9/20] w-[240px] bg-black rounded-[8px] overflow-hidden">
+                   <iframe 
+                    src="https://fast.wistia.net/embed/iframe/o3twreve7o?videoFoam=true" 
+                    title="Feedback Clientes Elite Xiters"
+                    allow="autoplay; fullscreen" 
+                    frameBorder="0" 
+                    scrolling="no" 
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
               }
             />
           )}
