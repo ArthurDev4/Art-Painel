@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -7,9 +6,9 @@ import { Check, CheckCircle2, MoreVertical, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 // SVG para a cauda do balão estilo WhatsApp
-const MessageTail = ({ color = "white", side = "left", position = "bottom" }: { color?: string, side?: "left" | "right", position?: "top" | "bottom" }) => (
+const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?: "left" | "right" }) => (
   <svg 
-    className={`absolute ${side === 'left' ? (position === 'top' ? 'top-0 -left-[8px]' : 'bottom-0 -left-[8px]') : (position === 'top' ? 'top-0 -right-[8px]' : 'bottom-0 -right-[8px]')} w-2 h-3`} 
+    className={`absolute top-0 ${side === 'left' ? '-left-[8px]' : '-right-[8px]'} w-2 h-3`} 
     viewBox="0 0 10 14" 
     style={{ fill: color }}
   >
@@ -22,8 +21,8 @@ const MessageTail = ({ color = "white", side = "left", position = "bottom" }: { 
 );
 
 const BotMessage = ({ content, time, showAvatar, isFirst }: { content: React.ReactNode, time: string, showAvatar: boolean, isFirst: boolean }) => (
-  <div className={`flex items-end gap-2 mb-1 animate-in fade-in slide-in-from-left-4 duration-500`}>
-    <div className="w-8 h-8 shrink-0 flex items-center justify-center">
+  <div className="flex items-start gap-2 mb-1 animate-in fade-in slide-in-from-left-4 duration-500">
+    <div className="w-8 h-8 shrink-0 flex items-center justify-center mt-auto mb-1">
       {showAvatar && (
         <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shadow-sm border border-white/10">
           <Image 
@@ -32,12 +31,13 @@ const BotMessage = ({ content, time, showAvatar, isFirst }: { content: React.Rea
             width={32} 
             height={32} 
             className="object-cover"
+            data-ai-hint="company logo"
           />
         </div>
       )}
     </div>
     <div className={`relative bg-white text-[#111b21] p-2.5 px-3.5 rounded-[12px] shadow-sm flex-1 max-w-[85%] ${isFirst ? 'rounded-tl-none' : ''}`}>
-      {isFirst && <MessageTail color="white" side="left" position="top" />}
+      {isFirst && <MessageTail color="white" side="left" />}
       <div className="text-[14.5px] leading-relaxed font-normal">
         {content}
       </div>
@@ -55,9 +55,11 @@ const TypingIndicator = () => (
         width={32} 
         height={32} 
         className="object-cover"
+        data-ai-hint="company logo"
       />
     </div>
     <div className="relative bg-white py-2.5 px-4 rounded-[12px] shadow-sm flex items-center justify-center min-w-[55px]">
+      <MessageTail color="white" side="left" />
       <div className="flex gap-1">
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
         <div className="w-1.5 h-1.5 bg-[#949494] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
@@ -119,9 +121,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-screen whatsapp-bg overflow-hidden font-body selection:bg-[#00a884]/30">
+    <div className="whatsapp-bg flex flex-col h-screen overflow-hidden font-body selection:bg-[#00a884]/30">
       {/* WhatsApp Header */}
-      <header className="bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md z-10 shrink-0">
+      <header className="relative z-10 bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
             <Image 
@@ -130,6 +132,7 @@ export default function Home() {
               width={40} 
               height={40}
               className="object-cover"
+              data-ai-hint="company logo"
             />
           </div>
           <div className="flex flex-col">
@@ -145,7 +148,7 @@ export default function Home() {
         </Button>
       </header>
 
-      <main ref={scrollRef} className="flex-1 overflow-y-auto p-4 md:px-12 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-4 pb-20">
+      <main ref={scrollRef} className="relative z-10 flex-1 overflow-y-auto p-4 md:px-12 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-4 pb-20">
         
         {/* Date Divider */}
         <div className="flex justify-center my-3 animate-in fade-in duration-700">
@@ -165,7 +168,7 @@ export default function Home() {
         </div>
 
         {/* Initial Bot Messages */}
-        <div className="w-full">
+        <div className="w-full space-y-1">
           {visibleMessages >= 1 && (
             <BotMessage 
               isFirst={true}
@@ -191,7 +194,7 @@ export default function Home() {
         {userChoice && (
           <div className="flex justify-end w-full mt-3 mb-1 animate-in fade-in slide-in-from-right-6 duration-300">
             <div className="relative bg-[#d9fdd3] text-[#111b21] py-2 px-3.5 rounded-[12px] rounded-tr-none shadow-sm min-w-[100px] max-w-[85%]">
-              <MessageTail color="#d9fdd3" side="right" position="top" />
+              <MessageTail color="#d9fdd3" side="right" />
               <p className="text-[14.5px] font-normal leading-relaxed pr-2">
                 {userChoice}
               </p>
@@ -207,7 +210,7 @@ export default function Home() {
         )}
 
         {/* Post-Choice Bot Messages */}
-        <div className="w-full mt-2">
+        <div className="w-full mt-2 space-y-1">
           {afterChoiceVisible >= 1 && (
             <BotMessage 
               isFirst={true}
@@ -255,12 +258,6 @@ export default function Home() {
           </div>
         )}
       </main>
-
-      <style jsx>{`
-        .whatsapp-bg {
-          min-height: 100vh;
-        }
-      `}</style>
     </div>
   );
 }

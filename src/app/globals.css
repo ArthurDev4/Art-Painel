@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -38,17 +37,31 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#0b141a] text-foreground font-body antialiased selection:bg-[#00a884]/30;
+    @apply bg-[#0b141a] text-foreground font-body antialiased;
   }
 }
 
 .whatsapp-bg {
-  /* Camada de cor escura + Imagem solicitada pelo usuário */
   background-color: #0b141a;
-  background-image: linear-gradient(rgba(11, 20, 26, 0.9), rgba(11, 20, 26, 0.9)), url("https://i.postimg.cc/66L9W7qC/image3231-1.png");
-  background-size: 450px;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Camada da estampa solicitada pelo usuário */
+.whatsapp-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("https://i.postimg.cc/66L9W7qC/image3231-1.png");
   background-repeat: repeat;
-  background-attachment: fixed;
+  background-size: 400px;
+  opacity: 0.1; /* Opacidade sutil para o padrão não cansar a vista */
+  pointer-events: none;
+  z-index: 0;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
