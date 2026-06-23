@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { Check, CheckCircle2, MoreVertical, Info } from 'lucide-react';
+import { Check, CheckCircle2, MoreVertical, Info, Play, Pause } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 // SVG para a cauda do balão estilo WhatsApp original
@@ -20,6 +20,84 @@ const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?
     )}
   </svg>
 );
+
+const AudioPlayer = ({ src }: { src: string }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current) {
+      const current = audioRef.current.currentTime;
+      const duration = audioRef.current.duration;
+      if (duration) {
+        setProgress((current / duration) * 100);
+      }
+    }
+  };
+
+  const handleEnded = () => {
+    setIsPlaying(false);
+    setProgress(0);
+  };
+
+  return (
+    <div className="flex items-center gap-3 py-1 pr-2 min-w-[240px]">
+      <audio 
+        ref={audioRef} 
+        src={src} 
+        onTimeUpdate={handleTimeUpdate} 
+        onEnded={handleEnded}
+      />
+      <Button 
+        variant="ghost" 
+        size="icon" 
+        onClick={togglePlay}
+        className="w-12 h-12 rounded-full bg-transparent hover:bg-black/5 flex items-center justify-center shrink-0"
+      >
+        {isPlaying ? (
+          <Pause className="w-8 h-8 fill-[#667781] text-[#667781]" />
+        ) : (
+          <Play className="w-8 h-8 fill-[#667781] text-[#667781]" />
+        )}
+      </Button>
+      <div className="flex-1 flex flex-col gap-1 mt-1">
+        <div className="relative w-full h-1 bg-[#dcdcdc] rounded-full overflow-hidden">
+          <div 
+            className="absolute top-0 left-0 h-full bg-[#53bdeb]" 
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-[10px] text-[#667781] font-medium">0:15</span>
+        </div>
+      </div>
+      <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 ml-1">
+         <Image 
+            src="https://picsum.photos/seed/elite-logo/100/100" 
+            alt="Avatar" 
+            width={40} 
+            height={40} 
+            className="object-cover"
+         />
+         <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#53bdeb] rounded-full border-2 border-white flex items-center justify-center">
+            <div className="w-1 h-1 bg-white rounded-full" />
+         </div>
+      </div>
+    </div>
+  );
+};
 
 const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: { content: React.ReactNode, time: string, showAvatar: boolean, isFirst?: boolean, noPadding?: boolean }) => (
   <div className="flex items-start gap-2 mb-3 animate-in fade-in slide-in-from-left-4 duration-500">
@@ -166,6 +244,12 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2500));
     setIsTyping(false);
     setFinalResponseVisible(1);
+
+    await new Promise(r => setTimeout(r, 2000));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 2500));
+    setIsTyping(false);
+    setFinalResponseVisible(2);
   };
 
   return (
@@ -318,6 +402,17 @@ export default function Home() {
               isFirst={true}
               time={currentTime}
               content={<>Calma, já estou enviado os valores... Enquanto isso escuta esse áudio, explico sobre tudo sobre a garantia 👇</>}
+            />
+          )}
+
+          {finalResponseVisible >= 2 && (
+            <BotMessage 
+              showAvatar={false}
+              isFirst={false}
+              time={currentTime}
+              content={
+                <AudioPlayer src="https://s3.gangx.site/typebot/public/workspaces/cm8ei2dg50000nyic8a0jkix8/typebots/s6sh4smbmkd061oggj42c0su/blocks/omu7fficv1a9i6fmpb4zpnu0?v=1746398823474" />
+              }
             />
           )}
 
