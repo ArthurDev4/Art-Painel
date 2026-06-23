@@ -462,7 +462,7 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-full rounded-[8px] overflow-hidden">
+                <div className="max-w-[260px] rounded-[8px] overflow-hidden">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
