@@ -132,7 +132,6 @@ const AudioPlayer = ({ src }: { src: string }) => {
             width={40} 
             height={40} 
             className="object-cover"
-            data-ai-hint="company logo"
          />
          <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#53bdeb] rounded-full border-2 border-white flex items-center justify-center">
             <div className="w-1 h-1 bg-white rounded-full" />
@@ -153,7 +152,6 @@ const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: {
             width={32} 
             height={32} 
             className="object-cover"
-            data-ai-hint="company logo"
           />
         </div>
       )}
@@ -196,7 +194,6 @@ const TypingIndicator = () => (
           width={32} 
           height={32} 
           className="object-cover"
-          data-ai-hint="company logo"
         />
       </div>
     </div>
@@ -219,6 +216,7 @@ export default function Home() {
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [afterChoiceVisible, setAfterChoiceVisible] = useState<number>(0);
   const [finalResponseVisible, setFinalResponseVisible] = useState<number>(0);
+  const [feedbackResponseVisible, setFeedbackResponseVisible] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -247,7 +245,7 @@ export default function Home() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, isTyping, userChoice, finalChoice, finalAction]);
+  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, isTyping, userChoice, finalChoice, finalAction]);
 
   const handleChoice = async (choice: string) => {
     setUserChoice(choice);
@@ -314,6 +312,19 @@ export default function Home() {
     setFinalResponseVisible(5);
   };
 
+  const handleFinalAction = async (action: string) => {
+    setFinalAction(action);
+    
+    if (action === "Ver Feedbacks de Clientes") {
+      await new Promise(r => setTimeout(r, 1200));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 2500));
+      setIsTyping(false);
+      setFeedbackResponseVisible(1);
+    }
+    // "Partir para o Pagamento" path can be added here later
+  };
+
   return (
     <div className="relative flex flex-col h-screen overflow-hidden font-body bg-[#0b141a]">
       <header className="relative z-20 bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
@@ -325,7 +336,6 @@ export default function Home() {
               width={40} 
               height={40}
               className="object-cover"
-              data-ai-hint="company logo"
             />
           </div>
           <div className="flex flex-col">
@@ -351,7 +361,9 @@ export default function Home() {
 
         <div className="flex justify-center mb-6 animate-in fade-in duration-500">
           <div className="bg-[#d1f4ff] text-[#111b21] p-3 rounded-xl flex items-start gap-3 shadow-sm border border-[#b3e5f2] max-w-[340px]">
-            <Info className="w-5 h-5 text-[#00a884] shrink-0 mt-0.5" />
+            <span className="shrink-0 mt-0.5">
+              <Info className="w-5 h-5 text-[#00a884]" />
+            </span>
             <p className="text-[13px] leading-tight font-normal">
               Essa empresa usa uma Conta Comercial verificada pela Meta.
             </p>
@@ -516,6 +528,17 @@ export default function Home() {
             <UserMessage content={finalAction} time={currentTime} />
           )}
 
+          {feedbackResponseVisible >= 1 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={true}
+              time={currentTime}
+              content={
+                <AudioPlayer src="https://s3.gangx.site/typebot/public/workspaces/cm8ei2dg50000nyic8a0jkix8/typebots/s6sh4smbmkd061oggj42c0su/blocks/qhm16q1wxukyytvucb948myi?v=1746401150462" />
+              }
+            />
+          )}
+
           {isTyping && <TypingIndicator />}
         </div>
 
@@ -548,13 +571,13 @@ export default function Home() {
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <div className="flex flex-wrap gap-2.5 justify-end max-w-[500px]">
               <Button 
-                onClick={() => setFinalAction("Partir para o Pagamento")}
+                onClick={() => handleFinalAction("Partir para o Pagamento")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
                 Partir para o Pagamento
               </Button>
               <Button 
-                onClick={() => setFinalAction("Ver Feedbacks de Clientes")}
+                onClick={() => handleFinalAction("Ver Feedbacks de Clientes")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
                 Ver Feedbacks de Clientes
@@ -566,3 +589,4 @@ export default function Home() {
     </div>
   );
 }
+
