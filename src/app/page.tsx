@@ -806,12 +806,6 @@ export default function Home() {
               >
                 Versão BASIC (7 Dias)
               </Button>
-              <Button 
-                onClick={() => handleFinalAction("Ver Feedbacks de Clientes")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
-              >
-                Ver Feedbacks de Clientes
-              </Button>
             </div>
           </div>
         )}
