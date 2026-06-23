@@ -260,7 +260,7 @@ export default function Home() {
 
     await new Promise(r => setTimeout(r, 1500));
     setIsTyping(true);
-    await new Promise(r => setTimeout(r, 2200));
+    await new Promise(r => setTimeout(r, 1800));
     setIsTyping(false);
     setAfterChoiceVisible(2);
 
@@ -296,6 +296,13 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2500));
     setIsTyping(false);
     setFinalResponseVisible(2);
+
+    // Nova etapa: Tabela de Preços enviada após o áudio
+    await new Promise(r => setTimeout(r, 5000));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 2500));
+    setIsTyping(false);
+    setFinalResponseVisible(3);
   };
 
   return (
@@ -458,6 +465,26 @@ export default function Home() {
               time={currentTime}
               content={
                 <AudioPlayer src="https://s3.gangx.site/typebot/public/workspaces/cm8ei2dg50000nyic8a0jkix8/typebots/s6sh4smbmkd061oggj42c0su/blocks/omu7fficv1a9i6fmpb4zpnu0?v=1746398823474" />
+              }
+            />
+          )}
+
+          {finalResponseVisible >= 3 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={false}
+              time={currentTime}
+              noPadding={true}
+              content={
+                <div className="w-full rounded-[8px] overflow-hidden">
+                  <Image 
+                    src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
+                    alt="Tabela de Preços Elite Xiters" 
+                    width={800} 
+                    height={1000} 
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
               }
             />
           )}
