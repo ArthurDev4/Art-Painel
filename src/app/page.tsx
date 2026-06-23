@@ -345,6 +345,12 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 1500));
       setIsTyping(false);
       setFeedbackResponseVisible(5);
+
+      await new Promise(r => setTimeout(r, 4000));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 2000));
+      setIsTyping(false);
+      setFeedbackResponseVisible(6);
     }
   };
 
@@ -635,6 +641,26 @@ export default function Home() {
             />
           )}
 
+          {feedbackResponseVisible >= 6 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={false}
+              time={currentTime}
+              noPadding={true}
+              content={
+                <div className="w-[240px] overflow-hidden rounded-[8px]">
+                  <Image 
+                    src="https://i.postimg.cc/XNZKGytv/wu8qba15.png" 
+                    alt="Chamada para Ação Extra" 
+                    width={240} 
+                    height={100} 
+                    className="w-full h-auto object-contain block"
+                  />
+                </div>
+              }
+            />
+          )}
+
           {isTyping && <TypingIndicator />}
         </div>
 
@@ -685,4 +711,3 @@ export default function Home() {
     </div>
   );
 }
-
