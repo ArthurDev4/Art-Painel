@@ -92,18 +92,16 @@ const AudioPlayer = ({ src }: { src: string }) => {
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={handleEnded}
       />
-      <Button 
-        variant="ghost" 
-        size="icon" 
+      <button 
         onClick={togglePlay}
-        className="w-12 h-12 rounded-full bg-transparent hover:bg-black/5 flex items-center justify-center shrink-0"
+        className="w-12 h-12 rounded-full bg-transparent hover:bg-black/5 flex items-center justify-center shrink-0 transition-colors"
       >
         {isPlaying ? (
           <Pause className="w-8 h-8 fill-[#667781] text-[#667781]" />
         ) : (
           <Play className="w-8 h-8 fill-[#667781] text-[#667781]" />
         )}
-      </Button>
+      </button>
       <div className="flex-1 flex flex-col gap-1 mt-1">
         <div 
           ref={progressBarRef}
@@ -415,7 +413,6 @@ export default function Home() {
                     src="https://fast.wistia.net/embed/iframe/k4y140j6p6?videoFoam=true" 
                     title="Vídeo Demonstrativo Elite Xiters"
                     allow="autoplay; fullscreen" 
-                    allowTransparency={true}
                     frameBorder="0" 
                     scrolling="no" 
                     className="w-full h-full"
