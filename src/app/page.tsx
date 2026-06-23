@@ -214,6 +214,7 @@ const TypingIndicator = () => (
 export default function Home() {
   const [userChoice, setUserChoice] = useState<string | null>(null);
   const [finalChoice, setFinalChoice] = useState<string | null>(null);
+  const [finalAction, setFinalAction] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState("");
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [afterChoiceVisible, setAfterChoiceVisible] = useState<number>(0);
@@ -246,7 +247,7 @@ export default function Home() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, isTyping, userChoice, finalChoice]);
+  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, isTyping, userChoice, finalChoice, finalAction]);
 
   const handleChoice = async (choice: string) => {
     setUserChoice(choice);
@@ -511,6 +512,10 @@ export default function Home() {
             />
           )}
 
+          {finalAction && (
+            <UserMessage content={finalAction} time={currentTime} />
+          )}
+
           {isTyping && <TypingIndicator />}
         </div>
 
@@ -534,6 +539,25 @@ export default function Home() {
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
                 Emulador
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {finalResponseVisible >= 5 && !finalAction && !isTyping && (
+          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-wrap gap-2.5 justify-end max-w-[500px]">
+              <Button 
+                onClick={() => setFinalAction("Partir para o Pagamento")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              >
+                Partir para o Pagamento
+              </Button>
+              <Button 
+                onClick={() => setFinalAction("Ver Feedbacks de Clientes")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+              >
+                Ver Feedbacks de Clientes
               </Button>
             </div>
           </div>
