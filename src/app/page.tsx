@@ -46,6 +46,24 @@ const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: {
   </div>
 );
 
+const UserMessage = ({ content, time }: { content: string, time: string }) => (
+  <div className="flex justify-end w-full mt-2 mb-3 animate-in fade-in slide-in-from-right-6 duration-300">
+    <div className="relative bg-[#d9fdd3] text-[#111b21] py-2 px-3.5 rounded-[12px] rounded-tr-none shadow-sm min-w-[100px] max-w-[85%]">
+      <MessageTail color="#d9fdd3" side="right" />
+      <p className="text-[14.5px] font-normal leading-relaxed pr-2">
+        {content}
+      </p>
+      <div className="flex items-center justify-end gap-0.5 mt-1">
+        <span className="text-[10px] text-[#667781] font-normal">{time}</span>
+        <div className="flex -space-x-1.5 ml-1">
+          <Check className="w-3.5 h-3.5 text-[#53bdeb]" strokeWidth={3} />
+          <Check className="w-3.5 h-3.5 text-[#53bdeb]" strokeWidth={3} />
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const TypingIndicator = () => (
   <div className="flex items-start gap-2 mb-3 animate-in fade-in duration-300">
     <div className="w-8 h-8 shrink-0 flex items-center justify-center mt-auto mb-1">
@@ -72,9 +90,11 @@ const TypingIndicator = () => (
 
 export default function Home() {
   const [userChoice, setUserChoice] = useState<string | null>(null);
+  const [finalChoice, setFinalChoice] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState("");
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [afterChoiceVisible, setAfterChoiceVisible] = useState<number>(0);
+  const [finalResponseVisible, setFinalResponseVisible] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -103,7 +123,7 @@ export default function Home() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [visibleMessages, afterChoiceVisible, isTyping, userChoice]);
+  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, isTyping, userChoice, finalChoice]);
 
   const handleChoice = async (choice: string) => {
     setUserChoice(choice);
@@ -136,6 +156,16 @@ export default function Home() {
     // Botão final
     await new Promise(r => setTimeout(r, 1500));
     setAfterChoiceVisible(5);
+  };
+
+  const handleFinalChoice = async () => {
+    setFinalChoice("Partir pros VALORES");
+    
+    await new Promise(r => setTimeout(r, 1000));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 2500));
+    setIsTyping(false);
+    setFinalResponseVisible(1);
   };
 
   return (
@@ -211,21 +241,7 @@ export default function Home() {
 
         {/* User Choice Section */}
         {userChoice && (
-          <div className="flex justify-end w-full mt-2 mb-3 animate-in fade-in slide-in-from-right-6 duration-300">
-            <div className="relative bg-[#d9fdd3] text-[#111b21] py-2 px-3.5 rounded-[12px] rounded-tr-none shadow-sm min-w-[100px] max-w-[85%]">
-              <MessageTail color="#d9fdd3" side="right" />
-              <p className="text-[14.5px] font-normal leading-relaxed pr-2">
-                {userChoice}
-              </p>
-              <div className="flex items-center justify-end gap-0.5 mt-1">
-                <span className="text-[10px] text-[#667781] font-normal">{currentTime}</span>
-                <div className="flex -space-x-1.5 ml-1">
-                  <Check className="w-3.5 h-3.5 text-[#53bdeb]" strokeWidth={3} />
-                  <Check className="w-3.5 h-3.5 text-[#53bdeb]" strokeWidth={3} />
-                </div>
-              </div>
-            </div>
-          </div>
+          <UserMessage content={userChoice} time={currentTime} />
         )}
 
         {/* Post-Choice Bot Section */}
@@ -281,14 +297,28 @@ export default function Home() {
             />
           )}
           
-          {afterChoiceVisible >= 5 && (
+          {afterChoiceVisible >= 5 && !finalChoice && (
             <div className="flex justify-center py-6 animate-in fade-in zoom-in duration-500">
                <Button 
+                onClick={handleFinalChoice}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-10 py-4 h-auto font-bold text-[16px] shadow-xl transition-all hover:scale-105 active:scale-95 border-none"
               >
                 Partir pros VALORES
               </Button>
             </div>
+          )}
+
+          {finalChoice && (
+            <UserMessage content={finalChoice} time={currentTime} />
+          )}
+
+          {finalResponseVisible >= 1 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={true}
+              time={currentTime}
+              content={<>Calma, já estou enviado os valores... Enquanto isso escuta esse áudio, explico sobre tudo sobre a garantia 👇</>}
+            />
           )}
 
           {isTyping && <TypingIndicator />}
