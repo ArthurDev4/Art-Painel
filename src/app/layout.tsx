@@ -4,8 +4,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'ELITE XITERS | Atendimento',
-  description: 'Fale com a ELITE XITERS e garanta seu cupom de desconto exclusivo.',
+  title: 'ART PAINEL | Atendimento',
+  description: 'Fale com a ART PAINEL e garanta seu cupom de desconto exclusivo.',
 };
 
 export default function RootLayout({

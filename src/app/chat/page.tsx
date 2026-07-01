@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from 'react';
@@ -21,7 +22,7 @@ export default function WhatsAppChatPage() {
             <div className="w-10 h-10 rounded-full bg-[#005c4b] flex items-center justify-center overflow-hidden border border-white/10">
               <Image 
                 src="https://picsum.photos/seed/elite/100/100" 
-                alt="Elite Xiters" 
+                alt="Art Painel" 
                 width={40} 
                 height={40}
                 className="object-cover"
@@ -31,7 +32,7 @@ export default function WhatsAppChatPage() {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1">
-              <span className="font-semibold text-[15px]">ELITE XITERS</span>
+              <span className="font-semibold text-[15px]">ART PAINEL</span>
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 text-white" />
             </div>
             <span className="text-xs text-emerald-500">online</span>

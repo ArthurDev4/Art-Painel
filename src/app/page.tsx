@@ -128,7 +128,7 @@ const AudioPlayer = ({ src }: { src: string }) => {
       <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 ml-1">
          <Image 
             src="https://picsum.photos/seed/elite-logo/100/100" 
-            alt="Avatar" 
+            alt="Art Painel Logo" 
             width={40} 
             height={40} 
             className="object-cover"
@@ -148,7 +148,7 @@ const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: {
         <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shadow-sm border border-white/10">
           <Image 
             src="https://picsum.photos/seed/elite-logo/100/100" 
-            alt="Avatar" 
+            alt="Art Painel Avatar" 
             width={32} 
             height={32} 
             className="object-cover"
@@ -190,7 +190,7 @@ const TypingIndicator = () => (
       <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shadow-sm border border-white/10">
         <Image 
           src="https://picsum.photos/seed/elite-logo/100/100" 
-          alt="Avatar" 
+          alt="Art Painel Avatar" 
           width={32} 
           height={32} 
           className="object-cover"
@@ -420,7 +420,7 @@ export default function Home() {
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
             <Image 
               src="https://picsum.photos/seed/elite-logo/100/100" 
-              alt="Elite Xiters" 
+              alt="Art Painel" 
               width={40} 
               height={40}
               className="object-cover"
@@ -428,7 +428,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="font-semibold text-[15px] uppercase tracking-wide">ELITE XITERS</span>
+              <span className="font-semibold text-[15px] uppercase tracking-wide">ART PAINEL</span>
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 text-[#202c33]" />
             </div>
             <span className="text-[12px] text-emerald-500 leading-none font-medium">online</span>
@@ -517,7 +517,7 @@ export default function Home() {
                 <div className="aspect-[4/3] w-[280px] sm:w-[320px] bg-black rounded-[8px] overflow-hidden">
                    <iframe 
                     src="https://fast.wistia.net/embed/iframe/k4y140j6p6?videoFoam=true" 
-                    title="Vídeo Demonstrativo Elite Xiters"
+                    title="Vídeo Demonstrativo Art Painel"
                     allow="autoplay; fullscreen" 
                     frameBorder="0" 
                     scrolling="no" 
@@ -579,10 +579,10 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[240px] sm:w-[280px] overflow-hidden rounded-[8px]">
+                <div className="w-[200px] sm:w-[240px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
-                    alt="Tabela de Preços Elite Xiters" 
+                    alt="Tabela de Preços Art Painel" 
                     width={800} 
                     height={1000} 
                     className="w-full h-auto object-contain block"
@@ -637,7 +637,7 @@ export default function Home() {
                 <div className="aspect-[9/20] w-[240px] bg-black rounded-[8px] overflow-hidden">
                    <iframe 
                     src="https://fast.wistia.net/embed/iframe/o3twreve7o?videoFoam=true" 
-                    title="Feedback Clientes Elite Xiters 1"
+                    title="Feedback Clientes Art Painel 1"
                     allow="autoplay; fullscreen" 
                     frameBorder="0" 
                     scrolling="no" 
@@ -658,7 +658,7 @@ export default function Home() {
                 <div className="aspect-[9/20] w-[240px] bg-black rounded-[8px] overflow-hidden">
                    <iframe 
                     src="https://fast.wistia.net/embed/iframe/f4aqsc4s1n?videoFoam=true" 
-                    title="Feedback Clientes Elite Xiters 2"
+                    title="Feedback Clientes Art Painel 2"
                     allow="autoplay; fullscreen" 
                     frameBorder="0" 
                     scrolling="no" 
@@ -742,10 +742,10 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[240px] sm:w-[280px] overflow-hidden rounded-[8px]">
+                <div className="w-[200px] sm:w-[240px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
-                    alt="Tabela de Preços Elite Xiters" 
+                    alt="Tabela de Preços Art Painel" 
                     width={800} 
                     height={1000} 
                     className="w-full h-auto object-contain block"
