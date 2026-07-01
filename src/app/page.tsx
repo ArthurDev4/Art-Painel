@@ -516,7 +516,7 @@ export default function Home() {
           )}
           
           {afterChoiceVisible >= 5 && !finalChoice && (
-            <div className="flex justify-center py-6 animate-in fade-in zoom-in duration-500">
+            <div className="w-full flex justify-end py-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
                <Button 
                 onClick={handleFinalChoice}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
