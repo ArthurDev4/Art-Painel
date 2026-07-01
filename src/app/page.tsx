@@ -313,12 +313,6 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 1500));
     setIsTyping(false);
     setFinalResponseVisible(5);
-
-    await new Promise(r => setTimeout(r, 2000));
-    setIsTyping(true);
-    await new Promise(r => setTimeout(r, 1500));
-    setIsTyping(false);
-    setFinalResponseVisible(6);
   };
 
   const handleFinalAction = async (action: string) => {
@@ -390,12 +384,6 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setReturnToPricesVisible(3);
-
-      await new Promise(r => setTimeout(r, 1500));
-      setIsTyping(true);
-      await new Promise(r => setTimeout(r, 1500));
-      setIsTyping(false);
-      setReturnToPricesVisible(4);
     }
   };
 
@@ -531,7 +519,7 @@ export default function Home() {
             <div className="flex justify-center py-6 animate-in fade-in zoom-in duration-500">
                <Button 
                 onClick={handleFinalChoice}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-10 py-4 h-auto font-bold text-[16px] shadow-xl transition-all hover:scale-105 active:scale-95 border-none"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
                 Partir pros VALORES
               </Button>
@@ -599,26 +587,6 @@ export default function Home() {
               isFirst={false}
               time={currentTime}
               content={<>Agora selecione abaixo qual versão você deseja comprar: 👇</>}
-            />
-          )}
-
-          {finalResponseVisible >= 6 && (
-            <BotMessage 
-              showAvatar={false}
-              isFirst={false}
-              time={currentTime}
-              noPadding={true}
-              content={
-                <div className="w-[110px] sm:w-[137.5px] overflow-hidden rounded-[8px]">
-                  <Image 
-                    src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
-                    alt="Tabela de Preços Elite Xiters" 
-                    width={200} 
-                    height={250} 
-                    className="w-full h-auto object-contain block"
-                  />
-                </div>
-              }
             />
           )}
 
@@ -785,26 +753,6 @@ export default function Home() {
             />
           )}
 
-          {returnToPricesVisible >= 4 && (
-            <BotMessage 
-              showAvatar={false}
-              isFirst={false}
-              time={currentTime}
-              noPadding={true}
-              content={
-                <div className="w-[110px] sm:w-[137.5px] overflow-hidden rounded-[8px]">
-                  <Image 
-                    src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
-                    alt="Tabela de Preços Elite Xiters" 
-                    width={200} 
-                    height={250} 
-                    className="w-full h-auto object-contain block"
-                  />
-                </div>
-              }
-            />
-          )}
-
           {versionChoice && (
             <UserMessage content={versionChoice} time={currentTime} />
           )}
@@ -837,7 +785,7 @@ export default function Home() {
           </div>
         )}
 
-        {finalResponseVisible >= 6 && !finalAction && !isTyping && (
+        {finalResponseVisible >= 5 && !finalAction && !isTyping && (
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <div className="flex flex-wrap gap-2.5 justify-end max-w-[600px]">
               <Button 
@@ -875,7 +823,7 @@ export default function Home() {
           </div>
         )}
 
-        {returnToPricesVisible >= 4 && !versionChoice && !isTyping && (
+        {returnToPricesVisible >= 3 && !versionChoice && !isTyping && (
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <div className="flex flex-wrap gap-2.5 justify-end max-w-[600px]">
               <Button 
