@@ -214,12 +214,15 @@ export default function Home() {
   const [finalAction, setFinalAction] = useState<string | null>(null);
   const [feedbackAction, setFeedbackAction] = useState<string | null>(null);
   const [versionChoice, setVersionChoice] = useState<string | null>(null);
+  const [planChoice, setPlanChoice] = useState<string | null>(null);
+  
   const [currentTime, setCurrentTime] = useState("");
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [afterChoiceVisible, setAfterChoiceVisible] = useState<number>(0);
   const [finalResponseVisible, setFinalResponseVisible] = useState<number>(0);
   const [feedbackResponseVisible, setFeedbackResponseVisible] = useState<number>(0);
   const [returnToPricesVisible, setReturnToPricesVisible] = useState<number>(0);
+  const [planSelectionVisible, setPlanSelectionVisible] = useState<number>(0);
   const [paymentFinalVisible, setPaymentFinalVisible] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -249,7 +252,7 @@ export default function Home() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, returnToPricesVisible, paymentFinalVisible, isTyping, userChoice, finalChoice, finalAction, feedbackAction, versionChoice]);
+  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, returnToPricesVisible, planSelectionVisible, paymentFinalVisible, isTyping, userChoice, finalChoice, finalAction, feedbackAction, versionChoice, planChoice]);
 
   const handleChoice = async (choice: string) => {
     setUserChoice(choice);
@@ -396,8 +399,18 @@ export default function Home() {
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
-      setPaymentFinalVisible(1);
+      setPlanSelectionVisible(1);
     }
+  };
+
+  const handlePlanChoice = async (plan: string) => {
+    setPlanChoice(plan);
+    
+    await new Promise(r => setTimeout(r, 800));
+    setIsTyping(true);
+    await new Promise(r => setTimeout(r, 2000));
+    setIsTyping(false);
+    setPaymentFinalVisible(1);
   };
 
   return (
@@ -566,12 +579,12 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[300px] sm:w-[400px] overflow-hidden rounded-[8px]">
+                <div className="w-[300px] sm:w-[500px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
-                    width={600} 
-                    height={750} 
+                    width={800} 
+                    height={1000} 
                     className="w-full h-auto object-contain block"
                   />
                 </div>
@@ -584,7 +597,7 @@ export default function Home() {
               showAvatar={true}
               isFirst={false}
               time={currentTime}
-              content={<>Agora selecione abaixo qual versão você deseja comprar: 👇</>}
+              content={<>Agora selecione abaixo como deseja prosseguir: 👇</>}
             />
           )}
 
@@ -729,12 +742,12 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[300px] sm:w-[400px] overflow-hidden rounded-[8px]">
+                <div className="w-[300px] sm:w-[500px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
-                    width={600} 
-                    height={750} 
+                    width={800} 
+                    height={1000} 
                     className="w-full h-auto object-contain block"
                   />
                 </div>
@@ -747,12 +760,25 @@ export default function Home() {
               showAvatar={true}
               isFirst={false}
               time={currentTime}
-              content={<>Agora selecione abaixo qual versão você deseja comprar: 👇</>}
+              content={<>Agora selecione abaixo como deseja prosseguir: 👇</>}
             />
           )}
 
           {versionChoice && (
             <UserMessage content={versionChoice} time={currentTime} />
+          )}
+
+          {planSelectionVisible >= 1 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={true}
+              time={currentTime}
+              content={<>Excelente escolha! 🚀 Selecione abaixo qual versão do PAINEL ELITE você deseja adquirir agora com desconto: 👇</>}
+            />
+          )}
+
+          {planChoice && (
+            <UserMessage content={planChoice} time={currentTime} />
           )}
 
           {paymentFinalVisible >= 1 && (
@@ -838,6 +864,31 @@ export default function Home() {
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
                 Ver Feedbacks de Clientes
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {planSelectionVisible >= 1 && !planChoice && !isTyping && (
+          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-col gap-2.5 items-end max-w-[600px]">
+              <Button 
+                onClick={() => handlePlanChoice("💎 PAINEL ELITE (PERMANENTE) - R$ 147,00")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
+              >
+                💎 PAINEL ELITE (PERMANENTE) - R$ 147,00
+              </Button>
+              <Button 
+                onClick={() => handlePlanChoice("⭐ PAINEL ELITE (MEDIUM) - R$ 97,00")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
+              >
+                ⭐ PAINEL ELITE (MEDIUM) - R$ 97,00
+              </Button>
+              <Button 
+                onClick={() => handlePlanChoice("🔥 PAINEL ELITE (BASIC) - R$ 67,00")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
+              >
+                🔥 PAINEL ELITE (BASIC) - R$ 67,00
               </Button>
             </div>
           </div>
