@@ -579,7 +579,7 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[260px] sm:w-[320px] overflow-hidden rounded-[8px]">
+                <div className="w-[240px] sm:w-[280px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
@@ -742,7 +742,7 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[260px] sm:w-[320px] overflow-hidden rounded-[8px]">
+                <div className="w-[240px] sm:w-[280px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
@@ -760,7 +760,7 @@ export default function Home() {
               showAvatar={true}
               isFirst={false}
               time={currentTime}
-              content={<>Agora selecione abaixo como deseja prosseguir: 👇</>}
+              content={<>Agora selecione abaixo qual versão você deseja comprar: 👇</>}
             />
           )}
 
@@ -850,20 +850,26 @@ export default function Home() {
           </div>
         )}
 
-        {returnToPricesVisible >= 3 && !versionChoice && !isTyping && (
+        {returnToPricesVisible >= 3 && !planChoice && !isTyping && (
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex flex-wrap gap-2.5 justify-end max-w-[600px]">
+            <div className="flex flex-col gap-2.5 items-end max-w-[600px]">
               <Button 
-                onClick={() => handleVersionChoice("Partir para o Pagamento")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+                onClick={() => handlePlanChoice("💎 PAINEL ELITE (PERMANENTE) - R$ 147,00")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
-                Partir para o Pagamento
+                💎 PAINEL ELITE (PERMANENTE) - R$ 147,00
               </Button>
               <Button 
-                onClick={() => handleFinalAction("Ver Feedbacks de Clientes")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+                onClick={() => handlePlanChoice("⭐ PAINEL ELITE (MEDIUM) - R$ 97,00")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
-                Ver Feedbacks de Clientes
+                ⭐ PAINEL ELITE (MEDIUM) - R$ 97,00
+              </Button>
+              <Button 
+                onClick={() => handlePlanChoice("🔥 PAINEL ELITE (BASIC) - R$ 67,00")}
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
+              >
+                🔥 PAINEL ELITE (BASIC) - R$ 67,00
               </Button>
             </div>
           </div>
