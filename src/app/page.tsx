@@ -580,10 +580,10 @@ export default function Home() {
           )}
           
           {afterChoiceVisible >= 5 && !finalChoice && (
-            <div className="w-full flex justify-end py-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="w-full flex justify-center sm:justify-end py-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
                <Button 
                 onClick={handleFinalChoice}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
                 Partir pros VALORES
               </Button>
@@ -842,23 +842,23 @@ export default function Home() {
         </div>
 
         {!userChoice && visibleMessages >= 2 && !isTyping && (
-          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex flex-wrap gap-2.5 justify-end max-w-[500px]">
+          <div className="w-full flex justify-center sm:justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-wrap gap-2.5 justify-center sm:justify-end w-full max-w-[500px]">
               <Button 
                 onClick={() => handleChoice("Celular ANDROID")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
                 Celular ANDROID
               </Button>
               <Button 
                 onClick={() => handleChoice("Celular IOS")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
                 Celular IOS
               </Button>
               <Button 
                 onClick={() => handleChoice("Emulador")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-medium text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
                 Emulador
               </Button>
@@ -867,17 +867,17 @@ export default function Home() {
         )}
 
         {finalResponseVisible >= 5 && !finalAction && !versionChoice && !isTyping && (
-          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex flex-wrap gap-2.5 justify-end max-w-[600px]">
+          <div className="w-full flex justify-center sm:justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-col sm:flex-row gap-2.5 justify-center sm:justify-end w-full max-w-[600px]">
               <Button 
                 onClick={() => handleVersionChoice("Partir para o Pagamento")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
                 Partir para o Pagamento
               </Button>
               <Button 
                 onClick={() => handleFinalAction("Ver Feedbacks de Clientes")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
                 Ver Feedbacks de Clientes
               </Button>
@@ -886,11 +886,11 @@ export default function Home() {
         )}
 
         {feedbackResponseVisible >= 7 && !feedbackAction && !isTyping && (
-          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex flex-wrap gap-2.5 justify-end max-w-[500px]">
+          <div className="w-full flex justify-center sm:justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-wrap gap-2.5 justify-center sm:justify-end w-full max-w-[500px]">
               <Button 
                 onClick={() => handleFeedbackAction("Sim, voltar para os valores")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-3.5 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-8 py-3.5 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
                 Sim, voltar para os valores
               </Button>
@@ -899,23 +899,23 @@ export default function Home() {
         )}
 
         {(planSelectionVisible >= 1 || returnToPricesVisible >= 2) && !planChoice && !isTyping && (
-          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex flex-col gap-2.5 items-end max-w-[600px]">
+          <div className="w-full flex justify-center sm:justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="flex flex-col gap-2.5 items-center sm:items-end w-full max-w-[600px]">
               <Button 
                 onClick={() => handlePlanChoice("🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[13px] sm:text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto text-center"
               >
                 🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90
               </Button>
               <Button 
                 onClick={() => handlePlanChoice("🥈 30 DIAS (MEDIUM) - R$ 19,90")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[13px] sm:text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto text-center"
               >
                 🥈 30 DIAS (MEDIUM) - R$ 19,90
               </Button>
               <Button 
                 onClick={() => handlePlanChoice("🥉 7 DIAS (BASIC) - R$ 9,90")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
+                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[13px] sm:text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto text-center"
               >
                 🥉 7 DIAS (BASIC) - R$ 9,90
               </Button>
