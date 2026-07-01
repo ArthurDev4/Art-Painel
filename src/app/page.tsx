@@ -13,6 +13,15 @@ const images = placeholderData.placeholderImages.reduce((acc, img) => {
 }, {} as Record<string, string>);
 
 const BACKGROUND_IMAGE = "https://i.postimg.cc/VvfpMMWQ/image3231-1.png";
+const NOTIFICATION_SOUND = "https://www.image2url.com/r2/default/audio/1782917382462-e4360a05-5e32-45ac-8a8a-ab71b3ceaf23.mp3";
+
+const playNotificationSound = () => {
+  const audio = new Audio(NOTIFICATION_SOUND);
+  audio.play().catch(e => {
+    // Silently handle autoplay restrictions
+    console.log("Audio play blocked by browser policy");
+  });
+};
 
 const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?: "left" | "right" }) => (
   <svg 
@@ -245,12 +254,14 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 1500));
       setIsTyping(false);
       setVisibleMessages(1);
+      playNotificationSound();
 
       await new Promise(r => setTimeout(r, 1000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 1800));
       setIsTyping(false);
       setVisibleMessages(2);
+      playNotificationSound();
     };
 
     sequence();
@@ -270,24 +281,28 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setAfterChoiceVisible(1);
+    playNotificationSound();
 
     await new Promise(r => setTimeout(r, 1000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 1800));
     setIsTyping(false);
     setAfterChoiceVisible(2);
+    playNotificationSound();
 
     await new Promise(r => setTimeout(r, 1000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2500));
     setIsTyping(false);
     setAfterChoiceVisible(3);
+    playNotificationSound();
 
     await new Promise(r => setTimeout(r, 3000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setAfterChoiceVisible(4);
+    playNotificationSound();
 
     await new Promise(r => setTimeout(r, 1000));
     setAfterChoiceVisible(5);
@@ -301,24 +316,28 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setFinalResponseVisible(1);
+    playNotificationSound();
 
     await new Promise(r => setTimeout(r, 1500));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setFinalResponseVisible(2);
+    playNotificationSound();
 
     await new Promise(r => setTimeout(r, 3000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2500));
     setIsTyping(false);
     setFinalResponseVisible(3);
+    playNotificationSound();
 
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setFinalResponseVisible(5);
+    playNotificationSound();
   };
 
   const handleFinalAction = async (action: string) => {
@@ -330,42 +349,49 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setFeedbackResponseVisible(1);
+      playNotificationSound();
 
       await new Promise(r => setTimeout(r, 1500));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 1500));
       setIsTyping(false);
       setFeedbackResponseVisible(2);
+      playNotificationSound();
 
       await new Promise(r => setTimeout(r, 1000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
       setFeedbackResponseVisible(3);
+      playNotificationSound();
 
       await new Promise(r => setTimeout(r, 3000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
       setFeedbackResponseVisible(4);
+      playNotificationSound();
 
       await new Promise(r => setTimeout(r, 3000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 1500));
       setIsTyping(false);
       setFeedbackResponseVisible(5);
+      playNotificationSound();
 
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setFeedbackResponseVisible(6);
+      playNotificationSound();
 
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setFeedbackResponseVisible(7);
+      playNotificationSound();
 
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(true);
@@ -384,12 +410,14 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setReturnToPricesVisible(1);
+      playNotificationSound();
 
       await new Promise(r => setTimeout(r, 1000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 1800));
       setIsTyping(false);
       setReturnToPricesVisible(2);
+      playNotificationSound();
     }
   };
 
@@ -402,6 +430,7 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setPlanSelectionVisible(1);
+      playNotificationSound();
     }
   };
 
@@ -413,6 +442,7 @@ export default function Home() {
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setPaymentFinalVisible(1);
+    playNotificationSound();
   };
 
   return (
