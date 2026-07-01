@@ -907,7 +907,7 @@ export default function Home() {
           <div className="w-full flex justify-center sm:justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <div className="flex flex-col gap-2.5 items-center sm:items-end w-full max-w-[600px]">
               <Button 
-                onClick={() => handlePlanChoice("🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90", "https://compraonlineseguura.com/c/0905ba6d80")}
+                onClick={() => handlePlanChoice("🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90", "https://compraonlineseguura.com/c/f4a47dce9b")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[13px] sm:text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto text-center"
               >
                 🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90
