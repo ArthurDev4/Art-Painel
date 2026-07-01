@@ -259,56 +259,56 @@ export default function Home() {
     setIsTyping(false);
     setAfterChoiceVisible(1);
 
-    await new Promise(r => setTimeout(r, 1500));
+    await new Promise(r => setTimeout(r, 1000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 1800));
     setIsTyping(false);
     setAfterChoiceVisible(2);
 
-    await new Promise(r => setTimeout(r, 1500));
+    await new Promise(r => setTimeout(r, 1000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2500));
     setIsTyping(false);
     setAfterChoiceVisible(3);
 
-    await new Promise(r => setTimeout(r, 5000));
+    await new Promise(r => setTimeout(r, 3000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setAfterChoiceVisible(4);
 
-    await new Promise(r => setTimeout(r, 1500));
+    await new Promise(r => setTimeout(r, 1000));
     setAfterChoiceVisible(5);
   };
 
   const handleFinalChoice = async () => {
     setFinalChoice("Partir pros VALORES");
     
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 800));
     setIsTyping(true);
-    await new Promise(r => setTimeout(r, 2500));
+    await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setFinalResponseVisible(1);
 
-    await new Promise(r => setTimeout(r, 2000));
+    await new Promise(r => setTimeout(r, 1500));
     setIsTyping(true);
-    await new Promise(r => setTimeout(r, 2500));
+    await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setFinalResponseVisible(2);
 
-    await new Promise(r => setTimeout(r, 5000));
+    await new Promise(r => setTimeout(r, 3000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2500));
     setIsTyping(false);
     setFinalResponseVisible(3);
 
-    await new Promise(r => setTimeout(r, 3000));
+    await new Promise(r => setTimeout(r, 2000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
     setFinalResponseVisible(4);
 
-    await new Promise(r => setTimeout(r, 3000));
+    await new Promise(r => setTimeout(r, 2000));
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 1500));
     setIsTyping(false);
@@ -319,43 +319,43 @@ export default function Home() {
     setFinalAction(action);
     
     if (action === "Ver Feedbacks de Clientes") {
-      await new Promise(r => setTimeout(r, 1200));
+      await new Promise(r => setTimeout(r, 800));
       setIsTyping(true);
-      await new Promise(r => setTimeout(r, 2500));
+      await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setFeedbackResponseVisible(1);
 
-      await new Promise(r => setTimeout(r, 2000));
+      await new Promise(r => setTimeout(r, 1500));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 1500));
       setIsTyping(false);
       setFeedbackResponseVisible(2);
 
-      await new Promise(r => setTimeout(r, 3000));
+      await new Promise(r => setTimeout(r, 1000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
       setFeedbackResponseVisible(3);
 
-      await new Promise(r => setTimeout(r, 5000));
+      await new Promise(r => setTimeout(r, 3000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2500));
       setIsTyping(false);
       setFeedbackResponseVisible(4);
 
-      await new Promise(r => setTimeout(r, 5000));
+      await new Promise(r => setTimeout(r, 3000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 1500));
       setIsTyping(false);
       setFeedbackResponseVisible(5);
 
-      await new Promise(r => setTimeout(r, 4000));
+      await new Promise(r => setTimeout(r, 2000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setFeedbackResponseVisible(6);
 
-      await new Promise(r => setTimeout(r, 3000));
+      await new Promise(r => setTimeout(r, 2000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
@@ -367,19 +367,19 @@ export default function Home() {
     setFeedbackAction(action);
     
     if (action === "Sim, voltar para os valores") {
-      await new Promise(r => setTimeout(r, 1000));
+      await new Promise(r => setTimeout(r, 800));
       setIsTyping(true);
-      await new Promise(r => setTimeout(r, 2500));
+      await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setReturnToPricesVisible(1);
 
-      await new Promise(r => setTimeout(r, 1500));
+      await new Promise(r => setTimeout(r, 1000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 1800));
       setIsTyping(false);
       setReturnToPricesVisible(2);
 
-      await new Promise(r => setTimeout(r, 1500));
+      await new Promise(r => setTimeout(r, 1000));
       setIsTyping(true);
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
@@ -557,12 +557,12 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[110px] sm:w-[137.5px] overflow-hidden rounded-[8px]">
+                <div className="w-[240px] sm:w-[300px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
-                    width={200} 
-                    height={250} 
+                    width={400} 
+                    height={500} 
                     className="w-full h-auto object-contain block"
                   />
                 </div>
@@ -731,12 +731,12 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[110px] sm:w-[137.5px] overflow-hidden rounded-[8px]">
+                <div className="w-[240px] sm:w-[300px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
-                    width={200} 
-                    height={250} 
+                    width={400} 
+                    height={500} 
                     className="w-full h-auto object-contain block"
                   />
                 </div>
