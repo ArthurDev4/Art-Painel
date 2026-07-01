@@ -913,7 +913,7 @@ export default function Home() {
                 🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90
               </Button>
               <Button 
-                onClick={() => handlePlanChoice("🥈 30 DIAS (MEDIUM) - R$ 19,90", "https://compraonlineseguura.com/c/380d864aca")}
+                onClick={() => handlePlanChoice("🥈 30 DIAS (MEDIUM) - R$ 19,90", "https://compraonlineseguura.com/c/9bf75fba70")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[13px] sm:text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto text-center"
               >
                 🥈 30 DIAS (MEDIUM) - R$ 19,90
