@@ -2,16 +2,28 @@
 {
   "placeholderImages": [
     {
-      "id": "profile-avatar",
-      "description": "Professional profile avatar",
-      "imageUrl": "https://picsum.photos/seed/profile-123/200/200",
-      "imageHint": "professional portrait"
+      "id": "art-painel-logo",
+      "description": "Logotipo oficial da ART PAINEL",
+      "imageUrl": "https://i.postimg.cc/K80zgr7K/729820084-122106335025324616-7658922295331197420-n.jpg",
+      "imageHint": "brand logo"
     },
     {
-      "id": "hero-abstract",
-      "description": "Abstract tech background",
-      "imageUrl": "https://picsum.photos/seed/pulse-abstract/1200/600",
-      "imageHint": "abstract technology"
+      "id": "price-table",
+      "description": "Tabela de Preços ART PAINEL",
+      "imageUrl": "https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png",
+      "imageHint": "price list"
+    },
+    {
+      "id": "cta-feedback-1",
+      "description": "Chamada para ação feedbacks 1",
+      "imageUrl": "https://i.postimg.cc/43mRk5FJ/cd6a1shc.png",
+      "imageHint": "cta banner"
+    },
+    {
+      "id": "cta-feedback-2",
+      "description": "Chamada para ação feedbacks 2",
+      "imageUrl": "https://i.postimg.cc/XNZKGytv/wu8qba15.png",
+      "imageHint": "cta banner"
     }
   ]
 }

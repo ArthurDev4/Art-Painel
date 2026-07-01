@@ -5,8 +5,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Check, CheckCircle2, MoreVertical, Info, Play, Pause } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import placeholderData from '@/app/lib/placeholder-images.json';
 
-// SVG para a cauda do balão estilo WhatsApp original
+const images = placeholderData.placeholderImages.reduce((acc, img) => {
+  acc[img.id] = img.imageUrl;
+  return acc;
+}, {} as Record<string, string>);
+
 const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?: "left" | "right" }) => (
   <svg 
     className={`absolute top-0 ${side === 'left' ? '-left-[8px]' : '-right-[8px]'} w-2.5 h-3 z-10`} 
@@ -127,7 +132,7 @@ const AudioPlayer = ({ src }: { src: string }) => {
       </div>
       <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 ml-1">
          <Image 
-            src="https://picsum.photos/seed/elite-logo/100/100" 
+            src={images['art-painel-logo']} 
             alt="Art Painel Logo" 
             width={40} 
             height={40} 
@@ -147,7 +152,7 @@ const BotMessage = ({ content, time, showAvatar, isFirst, noPadding = false }: {
       {showAvatar && (
         <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shadow-sm border border-white/10">
           <Image 
-            src="https://picsum.photos/seed/elite-logo/100/100" 
+            src={images['art-painel-logo']} 
             alt="Art Painel Avatar" 
             width={32} 
             height={32} 
@@ -189,7 +194,7 @@ const TypingIndicator = () => (
     <div className="w-8 h-8 shrink-0 flex items-center justify-center mt-auto mb-1">
       <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center overflow-hidden shadow-sm border border-white/10">
         <Image 
-          src="https://picsum.photos/seed/elite-logo/100/100" 
+          src={images['art-painel-logo']} 
           alt="Art Painel Avatar" 
           width={32} 
           height={32} 
@@ -382,12 +387,6 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 1800));
       setIsTyping(false);
       setReturnToPricesVisible(2);
-
-      await new Promise(r => setTimeout(r, 1000));
-      setIsTyping(true);
-      await new Promise(r => setTimeout(r, 2000));
-      setIsTyping(false);
-      setReturnToPricesVisible(3);
     }
   };
 
@@ -419,7 +418,7 @@ export default function Home() {
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
             <Image 
-              src="https://picsum.photos/seed/elite-logo/100/100" 
+              src={images['art-painel-logo']} 
               alt="Art Painel" 
               width={40} 
               height={40}
@@ -579,9 +578,9 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[200px] sm:w-[240px] overflow-hidden rounded-[8px]">
+                <div className="w-[180px] sm:w-[220px] overflow-hidden rounded-[8px]">
                   <Image 
-                    src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
+                    src={images['price-table']} 
                     alt="Tabela de Preços Art Painel" 
                     width={800} 
                     height={1000} 
@@ -678,7 +677,7 @@ export default function Home() {
               content={
                 <div className="w-[240px] overflow-hidden rounded-[8px]">
                   <Image 
-                    src="https://i.postimg.cc/43mRk5FJ/cd6a1shc.png" 
+                    src={images['cta-feedback-1']} 
                     alt="Chamada para Ação" 
                     width={240} 
                     height={100} 
@@ -698,7 +697,7 @@ export default function Home() {
               content={
                 <div className="w-[240px] overflow-hidden rounded-[8px]">
                   <Image 
-                    src="https://i.postimg.cc/XNZKGytv/wu8qba15.png" 
+                    src={images['cta-feedback-2']} 
                     alt="Chamada para Ação Extra" 
                     width={240} 
                     height={100} 
@@ -742,9 +741,9 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[200px] sm:w-[240px] overflow-hidden rounded-[8px]">
+                <div className="w-[180px] sm:w-[220px] overflow-hidden rounded-[8px]">
                   <Image 
-                    src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
+                    src={images['price-table']} 
                     alt="Tabela de Preços Art Painel" 
                     width={800} 
                     height={1000} 
@@ -752,15 +751,6 @@ export default function Home() {
                   />
                 </div>
               }
-            />
-          )}
-
-          {returnToPricesVisible >= 3 && (
-            <BotMessage 
-              showAvatar={true}
-              isFirst={false}
-              time={currentTime}
-              content={<>Agora selecione abaixo qual versão você deseja comprar: 👇</>}
             />
           )}
 
@@ -850,32 +840,7 @@ export default function Home() {
           </div>
         )}
 
-        {returnToPricesVisible >= 3 && !planChoice && !isTyping && (
-          <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="flex flex-col gap-2.5 items-end max-w-[600px]">
-              <Button 
-                onClick={() => handlePlanChoice("💎 PAINEL ELITE (PERMANENTE) - R$ 147,00")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
-              >
-                💎 PAINEL ELITE (PERMANENTE) - R$ 147,00
-              </Button>
-              <Button 
-                onClick={() => handlePlanChoice("⭐ PAINEL ELITE (MEDIUM) - R$ 97,00")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
-              >
-                ⭐ PAINEL ELITE (MEDIUM) - R$ 97,00
-              </Button>
-              <Button 
-                onClick={() => handlePlanChoice("🔥 PAINEL ELITE (BASIC) - R$ 67,00")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
-              >
-                🔥 PAINEL ELITE (BASIC) - R$ 67,00
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {planSelectionVisible >= 1 && !planChoice && !isTyping && (
+        {(planSelectionVisible >= 1 || returnToPricesVisible >= 2) && !planChoice && !isTyping && (
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <div className="flex flex-col gap-2.5 items-end max-w-[600px]">
               <Button 
@@ -903,3 +868,4 @@ export default function Home() {
     </div>
   );
 }
+
