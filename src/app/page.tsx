@@ -427,7 +427,8 @@ export default function Home() {
         }}
       />
 
-      <header className="relative z-20 bg-[#005E54] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
+      {/* Fixed Header */}
+      <header className="relative z-50 bg-[#005E54] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0 w-full">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
             <Image 
@@ -451,6 +452,7 @@ export default function Home() {
         </Button>
       </header>
 
+      {/* Scrollable Message Area */}
       <main ref={scrollRef} className="relative z-10 flex-1 overflow-y-auto p-4 md:px-12 max-w-4xl mx-auto w-full flex flex-col scrollbar-hide pt-4 pb-24">
         
         <div className="flex justify-center my-3 animate-in fade-in duration-700">
