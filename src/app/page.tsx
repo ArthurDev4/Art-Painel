@@ -579,7 +579,7 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[300px] sm:w-[500px] overflow-hidden rounded-[8px]">
+                <div className="w-[260px] sm:w-[320px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
@@ -742,7 +742,7 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[300px] sm:w-[500px] overflow-hidden rounded-[8px]">
+                <div className="w-[260px] sm:w-[320px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
