@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { Check, CheckCircle2, MoreVertical, Info, Play, Pause, X, ZoomIn } from 'lucide-react';
+import { Check, CheckCircle2, Info, Play, Pause, X, ZoomIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import placeholderData from '@/app/lib/placeholder-images.json';
 
@@ -448,9 +448,6 @@ export default function Home() {
             <span className="text-[12px] text-emerald-500 leading-none font-medium">online</span>
           </div>
         </div>
-        <Button variant="ghost" size="icon" className="text-[#aebac1] hover:bg-white/5 rounded-full">
-          <MoreVertical className="w-5 h-5" />
-        </Button>
       </header>
 
       {/* Scrollable Message Area */}
