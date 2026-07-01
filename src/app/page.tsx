@@ -220,6 +220,7 @@ export default function Home() {
   const [finalResponseVisible, setFinalResponseVisible] = useState<number>(0);
   const [feedbackResponseVisible, setFeedbackResponseVisible] = useState<number>(0);
   const [returnToPricesVisible, setReturnToPricesVisible] = useState<number>(0);
+  const [paymentFinalVisible, setPaymentFinalVisible] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -248,7 +249,7 @@ export default function Home() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, returnToPricesVisible, isTyping, userChoice, finalChoice, finalAction, feedbackAction, versionChoice]);
+  }, [visibleMessages, afterChoiceVisible, finalResponseVisible, feedbackResponseVisible, returnToPricesVisible, paymentFinalVisible, isTyping, userChoice, finalChoice, finalAction, feedbackAction, versionChoice]);
 
   const handleChoice = async (choice: string) => {
     setUserChoice(choice);
@@ -306,12 +307,6 @@ export default function Home() {
     setIsTyping(true);
     await new Promise(r => setTimeout(r, 2000));
     setIsTyping(false);
-    setFinalResponseVisible(4);
-
-    await new Promise(r => setTimeout(r, 2000));
-    setIsTyping(true);
-    await new Promise(r => setTimeout(r, 1500));
-    setIsTyping(false);
     setFinalResponseVisible(5);
   };
 
@@ -360,6 +355,12 @@ export default function Home() {
       await new Promise(r => setTimeout(r, 2000));
       setIsTyping(false);
       setFeedbackResponseVisible(7);
+
+      await new Promise(r => setTimeout(r, 2000));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 1500));
+      setIsTyping(false);
+      setFeedbackResponseVisible(8);
     }
   };
 
@@ -387,8 +388,16 @@ export default function Home() {
     }
   };
 
-  const handleVersionChoice = (choice: string) => {
+  const handleVersionChoice = async (choice: string) => {
     setVersionChoice(choice);
+    
+    if (choice === "Partir para o Pagamento") {
+      await new Promise(r => setTimeout(r, 1000));
+      setIsTyping(true);
+      await new Promise(r => setTimeout(r, 2000));
+      setIsTyping(false);
+      setPaymentFinalVisible(1);
+    }
   };
 
   return (
@@ -557,26 +566,15 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[240px] sm:w-[300px] overflow-hidden rounded-[8px]">
+                <div className="w-[300px] sm:w-[400px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
-                    width={400} 
-                    height={500} 
+                    width={600} 
+                    height={750} 
                     className="w-full h-auto object-contain block"
                   />
                 </div>
-              }
-            />
-          )}
-
-          {finalResponseVisible >= 4 && (
-            <BotMessage 
-              showAvatar={false}
-              isFirst={false}
-              time={currentTime}
-              content={
-                <AudioPlayer src="https://s3.gangx.site/typebot/public/workspaces/cm8ei2dg50000nyic8a0jkix8/typebots/s6sh4smbmkd061oggj42c0su/blocks/zz2pjkjbc29ov5v02dls3jg4?v=1746398877941" />
               }
             />
           )}
@@ -731,12 +729,12 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[240px] sm:w-[300px] overflow-hidden rounded-[8px]">
+                <div className="w-[300px] sm:w-[400px] overflow-hidden rounded-[8px]">
                   <Image 
                     src="https://i.postimg.cc/VsnH2T4Y/painel-de-preco.png" 
                     alt="Tabela de Preços Elite Xiters" 
-                    width={400} 
-                    height={500} 
+                    width={600} 
+                    height={750} 
                     className="w-full h-auto object-contain block"
                   />
                 </div>
@@ -755,6 +753,15 @@ export default function Home() {
 
           {versionChoice && (
             <UserMessage content={versionChoice} time={currentTime} />
+          )}
+
+          {paymentFinalVisible >= 1 && (
+            <BotMessage 
+              showAvatar={true}
+              isFirst={true}
+              time={currentTime}
+              content={<>Excelente escolha! 🚀 Estou gerando seu link de pagamento agora mesmo com o desconto aplicado. Aguarde um instante...</>}
+            />
           )}
 
           {isTyping && <TypingIndicator />}
@@ -785,26 +792,20 @@ export default function Home() {
           </div>
         )}
 
-        {finalResponseVisible >= 5 && !finalAction && !isTyping && (
+        {finalResponseVisible >= 5 && !finalAction && !versionChoice && !isTyping && (
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <div className="flex flex-wrap gap-2.5 justify-end max-w-[600px]">
               <Button 
-                onClick={() => handleVersionChoice("🎁 Versão Permanente na PROMOÇÃO")}
+                onClick={() => handleVersionChoice("Partir para o Pagamento")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
-                🎁 Versão Permanente na PROMOÇÃO
+                Partir para o Pagamento
               </Button>
               <Button 
-                onClick={() => handleVersionChoice("Versão MEDIUM (30 Dias)")}
+                onClick={() => handleFinalAction("Ver Feedbacks de Clientes")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
-                Versão MEDIUM (30 Dias)
-              </Button>
-              <Button 
-                onClick={() => handleVersionChoice("Versão BASIC (7 Dias)")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
-              >
-                Versão BASIC (7 Dias)
+                Ver Feedbacks de Clientes
               </Button>
             </div>
           </div>
@@ -827,22 +828,16 @@ export default function Home() {
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <div className="flex flex-wrap gap-2.5 justify-end max-w-[600px]">
               <Button 
-                onClick={() => handleVersionChoice("🎁 Versão Permanente na PROMOÇÃO")}
+                onClick={() => handleVersionChoice("Partir para o Pagamento")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
-                🎁 Versão Permanente na PROMOÇÃO
+                Partir para o Pagamento
               </Button>
               <Button 
-                onClick={() => handleVersionChoice("Versão MEDIUM (30 Dias)")}
+                onClick={() => handleFinalAction("Ver Feedbacks de Clientes")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
               >
-                Versão MEDIUM (30 Dias)
-              </Button>
-              <Button 
-                onClick={() => handleVersionChoice("Versão BASIC (7 Dias)")}
-                className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none"
-              >
-                Versão BASIC (7 Dias)
+                Ver Feedbacks de Clientes
               </Button>
             </div>
           </div>
