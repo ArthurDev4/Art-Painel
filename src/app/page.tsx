@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { Check, CheckCircle2, MoreVertical, Info, Play, Pause } from 'lucide-react';
+import { Check, CheckCircle2, MoreVertical, Info, Play, Pause, X, ZoomIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import placeholderData from '@/app/lib/placeholder-images.json';
 
@@ -222,6 +222,7 @@ export default function Home() {
   const [feedbackAction, setFeedbackAction] = useState<string | null>(null);
   const [versionChoice, setVersionChoice] = useState<string | null>(null);
   const [planChoice, setPlanChoice] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
   const [currentTime, setCurrentTime] = useState("");
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
@@ -593,7 +594,10 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[180px] sm:w-[220px] overflow-hidden rounded-[8px]">
+                <div 
+                  className="w-[180px] sm:w-[220px] overflow-hidden rounded-[8px] cursor-pointer hover:opacity-95 transition-opacity relative group"
+                  onClick={() => setSelectedImage(images['price-table'])}
+                >
                   <Image 
                     src={images['price-table']} 
                     alt="Tabela de Preços Art Painel" 
@@ -601,6 +605,9 @@ export default function Home() {
                     height={1000} 
                     className="w-full h-auto object-contain block"
                   />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 flex items-center justify-center transition-colors">
+                    <ZoomIn className="text-white opacity-0 group-hover:opacity-100 w-6 h-6" />
+                  </div>
                 </div>
               }
             />
@@ -690,7 +697,10 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[240px] overflow-hidden rounded-[8px]">
+                <div 
+                  className="w-[240px] overflow-hidden rounded-[8px] cursor-pointer hover:opacity-95 transition-opacity"
+                  onClick={() => setSelectedImage(images['cta-feedback-1'])}
+                >
                   <Image 
                     src={images['cta-feedback-1']} 
                     alt="Chamada para Ação" 
@@ -710,7 +720,10 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[240px] overflow-hidden rounded-[8px]">
+                <div 
+                  className="w-[240px] overflow-hidden rounded-[8px] cursor-pointer hover:opacity-95 transition-opacity"
+                  onClick={() => setSelectedImage(images['cta-feedback-2'])}
+                >
                   <Image 
                     src={images['cta-feedback-2']} 
                     alt="Chamada para Ação Extra" 
@@ -756,7 +769,10 @@ export default function Home() {
               time={currentTime}
               noPadding={true}
               content={
-                <div className="w-[180px] sm:w-[220px] overflow-hidden rounded-[8px]">
+                <div 
+                  className="w-[180px] sm:w-[220px] overflow-hidden rounded-[8px] cursor-pointer hover:opacity-95 transition-opacity"
+                  onClick={() => setSelectedImage(images['price-table'])}
+                >
                   <Image 
                     src={images['price-table']} 
                     alt="Tabela de Preços Art Painel" 
@@ -880,6 +896,34 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      {/* Fullscreen Image Overlay (Lightbox) */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 animate-in fade-in duration-300 backdrop-blur-sm"
+          onClick={() => setSelectedImage(null)}
+        >
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="absolute top-4 right-4 text-white hover:bg-white/10 rounded-full z-[110]"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedImage(null);
+            }}
+          >
+            <X className="w-8 h-8" />
+          </Button>
+          <div className="relative w-full h-full flex items-center justify-center">
+            <img 
+              src={selectedImage} 
+              alt="Visualização ampliada" 
+              className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl animate-in zoom-in duration-300"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
