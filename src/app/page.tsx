@@ -12,6 +12,8 @@ const images = placeholderData.placeholderImages.reduce((acc, img) => {
   return acc;
 }, {} as Record<string, string>);
 
+const BACKGROUND_IMAGE = "https://i.postimg.cc/VvfpMMWQ/image3231-1.png";
+
 const MessageTail = ({ color = "white", side = "left" }: { color?: string, side?: "left" | "right" }) => (
   <svg 
     className={`absolute top-0 ${side === 'left' ? '-left-[8px]' : '-right-[8px]'} w-2.5 h-3 z-10`} 
@@ -414,6 +416,17 @@ export default function Home() {
 
   return (
     <div className="relative flex flex-col h-screen overflow-hidden font-body bg-[#0b141a]">
+      {/* Background Image Overlay */}
+      <div 
+        className="absolute inset-0 z-0 opacity-40 pointer-events-none"
+        style={{
+          backgroundImage: `url(${BACKGROUND_IMAGE})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+
       <header className="relative z-20 bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
@@ -868,4 +881,3 @@ export default function Home() {
     </div>
   );
 }
-
