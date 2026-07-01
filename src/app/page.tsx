@@ -434,7 +434,7 @@ export default function Home() {
     }
   };
 
-  const handlePlanChoice = async (plan: string) => {
+  const handlePlanChoice = async (plan: string, redirectUrl: string) => {
     setPlanChoice(plan);
     
     await new Promise(r => setTimeout(r, 800));
@@ -443,6 +443,11 @@ export default function Home() {
     setIsTyping(false);
     setPaymentFinalVisible(1);
     playNotificationSound();
+
+    // Redireciona após um pequeno delay para o usuário ver a confirmação
+    setTimeout(() => {
+      window.location.href = redirectUrl;
+    }, 1500);
   };
 
   return (
@@ -902,19 +907,19 @@ export default function Home() {
           <div className="w-full flex justify-center sm:justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <div className="flex flex-col gap-2.5 items-center sm:items-end w-full max-w-[600px]">
               <Button 
-                onClick={() => handlePlanChoice("🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90")}
+                onClick={() => handlePlanChoice("🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90", "https://compraonlineseguura.com/c/0905ba6d80")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[13px] sm:text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto text-center"
               >
                 🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90
               </Button>
               <Button 
-                onClick={() => handlePlanChoice("🥈 30 DIAS (MEDIUM) - R$ 19,90")}
+                onClick={() => handlePlanChoice("🥈 30 DIAS (MEDIUM) - R$ 19,90", "https://compraonlineseguura.com/c/380d864aca")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[13px] sm:text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto text-center"
               >
                 🥈 30 DIAS (MEDIUM) - R$ 19,90
               </Button>
               <Button 
-                onClick={() => handlePlanChoice("🥉 7 DIAS (BASIC) - R$ 9,90")}
+                onClick={() => handlePlanChoice("🥉 7 DIAS (BASIC) - R$ 9,90", "https://compraonlineseguura.com/c/cda1846aab")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[13px] sm:text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto text-center"
               >
                 🥉 7 DIAS (BASIC) - R$ 9,90
@@ -931,8 +936,7 @@ export default function Home() {
           onClick={() => setSelectedImage(null)}
         >
           <Button 
-            variant="ghost" 
-            size="icon" 
+            variant="ghost" size="icon" 
             className="absolute top-4 right-4 text-white hover:bg-white/10 rounded-full z-[110]"
             onClick={(e) => {
               e.stopPropagation();
