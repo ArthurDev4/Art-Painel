@@ -427,7 +427,7 @@ export default function Home() {
         }}
       />
 
-      <header className="relative z-20 bg-[#202c33] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
+      <header className="relative z-20 bg-[#005E54] text-white px-4 py-2 flex items-center justify-between shadow-md shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10 shadow-inner">
             <Image 
@@ -441,7 +441,7 @@ export default function Home() {
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
               <span className="font-semibold text-[15px] uppercase tracking-wide">ART PAINEL</span>
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 text-[#202c33]" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 fill-emerald-500 text-[#005E54]" />
             </div>
             <span className="text-[12px] text-emerald-500 leading-none font-medium">online</span>
           </div>
