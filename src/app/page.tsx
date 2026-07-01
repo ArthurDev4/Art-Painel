@@ -875,22 +875,22 @@ export default function Home() {
           <div className="w-full flex justify-end py-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
             <div className="flex flex-col gap-2.5 items-end max-w-[600px]">
               <Button 
-                onClick={() => handlePlanChoice("💎 PAINEL ELITE (PERMANENTE) - R$ 147,00")}
+                onClick={() => handlePlanChoice("🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
-                💎 PAINEL ELITE (PERMANENTE) - R$ 147,00
+                🏆 VERSÃO PERMANENTE (MAIS VENDIDA) - R$ 27,90
               </Button>
               <Button 
-                onClick={() => handlePlanChoice("⭐ PAINEL ELITE (MEDIUM) - R$ 97,00")}
+                onClick={() => handlePlanChoice("🥈 30 DIAS (MEDIUM) - R$ 19,90")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
-                ⭐ PAINEL ELITE (MEDIUM) - R$ 97,00
+                🥈 30 DIAS (MEDIUM) - R$ 19,90
               </Button>
               <Button 
-                onClick={() => handlePlanChoice("🔥 PAINEL ELITE (BASIC) - R$ 67,00")}
+                onClick={() => handlePlanChoice("🥉 7 DIAS (BASIC) - R$ 9,90")}
                 className="bg-[#004d40] hover:bg-[#003d33] text-white rounded-full px-6 py-3 h-auto font-bold text-[14px] shadow-lg transition-transform active:scale-95 border-none w-full sm:w-auto"
               >
-                🔥 PAINEL ELITE (BASIC) - R$ 67,00
+                🥉 7 DIAS (BASIC) - R$ 9,90
               </Button>
             </div>
           </div>
