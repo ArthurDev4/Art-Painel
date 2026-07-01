@@ -507,7 +507,7 @@ export default function Home() {
               isFirst={true}
               time={currentTime}
               content={
-                <>🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥</>
+                <>🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Art Painel! 🔥</>
               }
             />
           )}
@@ -545,7 +545,7 @@ export default function Home() {
               showAvatar={false}
               isFirst={false}
               time={currentTime}
-              content={<>Agora, vou te enviar um vídeo demonstrativo. Assiste com atenção para ver o PAINEL na prática! 👇</>}
+              content={<>Agora, vou te enviar um vídeo demonstrativo. Assiste com atenção para ver o ART PAINEL na prática! 👇</>}
             />
           )}
 
@@ -670,7 +670,7 @@ export default function Home() {
               isFirst={false}
               time={currentTime}
               content={
-                <>Se LIGA nos <strong>FEEDBACKS</strong> de quem já comprou o PAINEL 👇</>
+                <>Se LIGA nos <strong>FEEDBACKS</strong> de quem já comprou o ART PAINEL 👇</>
               }
             />
           )}
@@ -769,7 +769,7 @@ export default function Home() {
               isFirst={false}
               time={currentTime}
               content={
-                <>Depois desses feedbacks, dá pra ver que o painel realmente é INSANO. <strong>Quer voltar pros valores e garantir o seu também?</strong> 🔥 Ou ainda tem dúvidas?</>
+                <>Depois desses feedbacks, dá pra ver que o Art Painel realmente é INSANO. <strong>Quer voltar pros valores e garantir o seu também?</strong> 🔥 Ou ainda tem dúvidas?</>
               }
             />
           )}
@@ -784,7 +784,7 @@ export default function Home() {
               isFirst={true}
               time={currentTime}
               content={
-                <>Parabéns pela escolha! 👊 <strong>Tenho certeza que você vai amassar usando o PAINEL ELITE!</strong> Segue a tabela de valores novamente! 👇</>
+                <>Parabéns pela escolha! 👊 <strong>Tenho certeza que você vai amassar usando o ART PAINEL!</strong> Segue a tabela de valores novamente! 👇</>
               }
             />
           )}
@@ -821,7 +821,7 @@ export default function Home() {
               showAvatar={true}
               isFirst={true}
               time={currentTime}
-              content={<>Excelente escolha! 🚀 Selecione abaixo qual versão do PAINEL ELITE você deseja adquirir agora com desconto: 👇</>}
+              content={<>Excelente escolha! 🚀 Selecione abaixo qual versão do ART PAINEL você deseja adquirir agora com desconto: 👇</>}
             />
           )}
 

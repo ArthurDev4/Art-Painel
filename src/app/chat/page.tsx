@@ -71,7 +71,7 @@ export default function WhatsAppChatPage() {
             {/* Message tail */}
             <div className="absolute bottom-0 -left-2 w-4 h-4 bg-white clip-path-tail-left"></div>
             <p className="text-[14.5px] font-medium leading-relaxed">
-              🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Painel Elite! 🔥
+              🎉 <strong>PARABÉNS!</strong> Você está entre os <strong>100 primeiros</strong> que garantiram seu cupom de desconto na compra do Art Painel! 🔥
             </p>
             <div className="text-[10px] text-[#667781] text-right mt-1 font-medium">16:45</div>
           </div>
